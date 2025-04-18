@@ -1,6 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+FREQUENCY_CHOICES = [
+    ('daily', 'Daily'),
+    ('weekly', 'Weekly'),
+    ('biweekly', 'Biweekly'),
+    ('monthly', 'Monthly'),
+    ('quarterly', 'Quarterly'),
+    ('semiannual', 'Semiannual'),
+    ('yearly', 'Yearly'),
+]
+
 # Create your models here.
 
 
@@ -18,7 +28,11 @@ class Income(models.Model):
     description = models.CharField(max_length=25)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     recurring = models.BooleanField(default=False)
-    frequency = models.CharField(max_length=20, blank=True, null= True)
+    frequency = models.CharField(
+        max_length=20,
+        choices=FREQUENCY_CHOICES,
+        default='monthly',
+    )
 
     def __str__(self):
         return f"{self.amount} on {self.date.strftime('%Y-%m-%d')}"
@@ -30,7 +44,11 @@ class Expense(models.Model):
     description = models.CharField(max_length=25)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     recurring = models.BooleanField(default=False)
-    frequency = models.CharField(max_length=20, blank=True, null=True)
+    frequency = models.CharField(
+        max_length=20,
+        choices=FREQUENCY_CHOICES,
+        default='monthly',
+    )
 
     def __str__(self):
         return f"{self.amount} on {self.date.strftime('%Y-%m-%d')}"
@@ -39,7 +57,11 @@ class Expense(models.Model):
 class RecurringRule(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
-    frequency = models.CharField(max_length=20, blank=True, null=True)
+    frequency = models.CharField(
+        max_length=20,
+        choices=FREQUENCY_CHOICES,
+        default='monthly',
+    )
     type = models.CharField(max_length=25)
     description = models.CharField(max_length=25)
     amount = models.FloatField()
