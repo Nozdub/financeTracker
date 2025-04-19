@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Setup Django with several initial classes for the project.">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/financeTracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/financeTracker.iml" afterDir="false" />
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Ads recurring rule functionality and tested it in shell.">
+      <change afterPath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -38,6 +39,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ignore.virus.scanning.warn.message": "true",
@@ -84,7 +86,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744839664430</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Ads recurring rule functionality and tested it in shell.">
+      <option name="closed" value="true" />
+      <created>1744976988335</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744976988335</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -101,6 +111,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial project scaffold" />
     <MESSAGE value="Setup Django with several initial classes for the project." />
-    <option name="LAST_COMMIT_MESSAGE" value="Setup Django with several initial classes for the project." />
+    <MESSAGE value="Ads recurring rule functionality and tested it in shell." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ads recurring rule functionality and tested it in shell." />
   </component>
 </project>
