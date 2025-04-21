@@ -14,34 +14,38 @@ def transaction_history(request):
     expenses = Expense.objects.all()
 
     for income in incomes:
-        income_dict = {
+        transactions.append({
+            "id": income.id,
             "date": income.date,
             "type": "Income",
             "amount": income.amount,
             "description": income.description,
             "category": income.category.name,
             "running_total": 0
-        }
-        transactions.append(income_dict)
+        })
 
     for expense in expenses:
-        expense_dict = {
+        transactions.append({
+            "id": expense.id,
             "date": expense.date,
             "type": "Expense",
             "amount": -abs(expense.amount),
             "description": expense.description,
             "category": expense.category.name,
             "running_total": 0
-        }
-        transactions.append(expense_dict)
+        })
 
-    transactions.sort(key=itemgetter("date"), reverse=True)
+    # ✅ STEP 1: Sort oldest → newest for running total
+    transactions.sort(key=lambda tx: (tx["date"], tx["id"]))
 
+    # ✅ STEP 2: Calculate running total in that order
     total = 0.0
-#  must fix timestamp issue
-    for i in transactions:
-        total += i["amount"]
-        i["running_total"] = total
+    for tx in transactions:
+        total += tx["amount"]
+        tx["running_total"] = total
+
+    # ✅ STEP 3: Sort newest → oldest for display
+    transactions.sort(key=lambda tx: (tx["date"], tx["id"]), reverse=True)
 
     return render(request, 'finance/transaction_history.html', {
         'transactions': transactions

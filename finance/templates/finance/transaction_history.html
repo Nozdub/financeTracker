@@ -47,6 +47,7 @@
         <thead>
             <tr>
                 <th>Date</th>
+                <th>ID</th>
                 <th>Type</th>
                 <th>Description</th>
                 <th>Category</th>
@@ -58,6 +59,7 @@
             {% for tx in transactions %}
             <tr>
                 <td>{{ tx.date|date:"Y-m-d H:i" }}</td>
+                <td>{{ tx.id}}</td>
                 <td class="{{ tx.type|lower }}">{{ tx.type }}</td>
                 <td>{{ tx.description }}</td>
                 <td>{{ tx.category }}</td>
