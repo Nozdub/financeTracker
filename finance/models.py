@@ -23,6 +23,7 @@ class Category(models.Model):
 
 
 class Income(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField()
     amount = models.FloatField()
     description = models.CharField(max_length=25)
@@ -39,6 +40,7 @@ class Income(models.Model):
 
 
 class Expense(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField()
     amount = models.FloatField()
     description = models.CharField(max_length=25)

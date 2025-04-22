@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads basic html page and transaction logic.&#10;- Transaction logic faulty due to timestamp handling, fix in next commit.">
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="fixed transition total, it now works according to plan.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745020875283</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed transition total, it now works according to plan.">
+      <option name="closed" value="true" />
+      <created>1745247636232</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745247636232</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,6 +127,7 @@
     <MESSAGE value="Setup Django with several initial classes for the project." />
     <MESSAGE value="Ads recurring rule functionality and tested it in shell." />
     <MESSAGE value="ads basic html page and transaction logic.&#10;- Transaction logic faulty due to timestamp handling, fix in next commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="ads basic html page and transaction logic.&#10;- Transaction logic faulty due to timestamp handling, fix in next commit." />
+    <MESSAGE value="fixed transition total, it now works according to plan." />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed transition total, it now works according to plan." />
   </component>
 </project>

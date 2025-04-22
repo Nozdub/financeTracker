@@ -10,8 +10,8 @@ from .models import Income, Expense
 def transaction_history(request):
     transactions = []  # List that holds transactions
 
-    incomes = Income.objects.all()
-    expenses = Expense.objects.all()
+    incomes = Income.objects.filter(user=request.user)
+    expenses = Expense.objects.filter(user=request.user)
 
     for income in incomes:
         transactions.append({
