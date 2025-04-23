@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads tests">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="fixes CI issues">
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +129,55 @@
       <option name="project" value="LOCAL" />
       <updated>1745422206956</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ads tests changed name of branches">
+      <option name="closed" value="true" />
+      <created>1745423000006</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745423000006</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424236202</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424236202</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424648284</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424648284</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424736086</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424736086</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424852897</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424852897</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424946451</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424946451</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,6 +200,8 @@
     <MESSAGE value="adds default user so that transactions are user bound." />
     <MESSAGE value="adds register user option as well as login, also sorted out user filtered transactions." />
     <MESSAGE value="ads tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="ads tests" />
+    <MESSAGE value="ads tests changed name of branches" />
+    <MESSAGE value="fixes CI issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes CI issues" />
   </component>
 </project>
