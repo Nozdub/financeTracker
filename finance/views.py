@@ -2,11 +2,14 @@ from operator import itemgetter
 
 from django.shortcuts import render
 from .models import Income, Expense
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from .forms import RegisterForm
 
 
 # Create your views here.
 
-
+@login_required()
 def transaction_history(request):
     transactions = []  # List that holds transactions
 
@@ -50,3 +53,15 @@ def transaction_history(request):
     return render(request, 'finance/transaction_history.html', {
         'transactions': transactions
     })
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_Valid():
+            form.save()
+            return redirect("login")  # Sends user to login view after registering user.
+    else:
+        form = RegisterForm()
+
+    return render(request, "finance/register.html",  {"form": form})
