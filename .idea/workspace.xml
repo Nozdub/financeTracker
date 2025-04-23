@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="adds default user so that transactions are user bound.">
-      <change afterPath="$PROJECT_DIR$/finance/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance/templates/finance/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance/templates/finance/register.html" afterDir="false" />
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="adds register user option as well as login, also sorted out user filtered transactions.">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/django.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/django.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/test_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_recurring.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_recurring.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -121,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745311753714</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="adds register user option as well as login, also sorted out user filtered transactions.">
+      <option name="closed" value="true" />
+      <created>1745416925936</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745416925936</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +148,7 @@
     <MESSAGE value="ads basic html page and transaction logic.&#10;- Transaction logic faulty due to timestamp handling, fix in next commit." />
     <MESSAGE value="fixed transition total, it now works according to plan." />
     <MESSAGE value="adds default user so that transactions are user bound." />
-    <option name="LAST_COMMIT_MESSAGE" value="adds default user so that transactions are user bound." />
+    <MESSAGE value="adds register user option as well as login, also sorted out user filtered transactions." />
+    <option name="LAST_COMMIT_MESSAGE" value="adds register user option as well as login, also sorted out user filtered transactions." />
   </component>
 </project>
