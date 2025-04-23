@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads tests">
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads tests changed name of branches">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/django.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/django.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745422206956</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ads tests changed name of branches">
+      <option name="closed" value="true" />
+      <created>1745423000006</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745423000006</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,6 +161,7 @@
     <MESSAGE value="adds default user so that transactions are user bound." />
     <MESSAGE value="adds register user option as well as login, also sorted out user filtered transactions." />
     <MESSAGE value="ads tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="ads tests" />
+    <MESSAGE value="ads tests changed name of branches" />
+    <option name="LAST_COMMIT_MESSAGE" value="ads tests changed name of branches" />
   </component>
 </project>
