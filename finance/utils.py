@@ -1,5 +1,6 @@
 from datetime import date
 from .models import RecurringRule, Income, Expense
+from django.utils.timezone import now
 
 
 def should_trigger_daily(rule, today):
@@ -46,11 +47,11 @@ FREQUENCY_HANDLERS = {
 
 
 def process_recurring_rules():
-    today = date.today()
+    today = now()
     rules = RecurringRule.objects.all()
 
     for rule in rules:
-        if rule.start_date.date() > today:
+        if rule.start_date > today:
             continue
         if rule.end_date and rule.end_date.date() < today:
             continue
@@ -60,6 +61,7 @@ def process_recurring_rules():
         if handler and handler(rule, today):
             if rule.type == 'income':
                 Income.objects.create(
+                    user=rule.user,
                     date=today,
                     amount=rule.amount,
                     description=rule.description,
@@ -69,6 +71,7 @@ def process_recurring_rules():
                 )
             elif rule.type == 'expense':
                 Expense.objects.create(
+                    user=rule.user,
                     date=today,
                     amount=rule.amount,
                     description=rule.description,
@@ -76,3 +79,11 @@ def process_recurring_rules():
                     recurring=True,
                     frequency=rule.frequency,
                 )
+
+
+def calculate_running_total(transactions: list[dict]) -> list[dict]:
+    total = 0.0
+    for tx in transactions:
+        total += tx["amount"]
+        tx["running_total"] = total
+    return transactions
