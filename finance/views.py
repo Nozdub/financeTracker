@@ -17,10 +17,11 @@ def transaction_history(request):
     transactions = []  # List that holds transactions
     today = now()
 
-    incomes = Income.objects.filter(date__lte=today)
-    expenses = Expense.objects.filter(date__lte=today)
+    incomes = Income.objects.filter(user=request.user, date__lte=today)
+    expenses = Expense.objects.filter(user=request.user, date__lte=today)
 
     upcoming_expenses = Expense.objects.filter(
+        user=request.user,
         date__gt=today,
         date__lte=today + timedelta(days=7),
         recurring=True

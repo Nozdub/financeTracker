@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="fixes CI issues">
-      <change afterPath="$PROJECT_DIR$/finance/templates/finance/add_expense.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance/templates/finance/add_income.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance/templates/finance/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finance/templates/finance/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/django.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/django.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/financeTracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/financeTracker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745425051717</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages.">
+      <option name="closed" value="true" />
+      <created>1745517933492</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1745517933492</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,6 +216,7 @@
     <MESSAGE value="ads tests" />
     <MESSAGE value="ads tests changed name of branches" />
     <MESSAGE value="fixes CI issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes CI issues" />
+    <MESSAGE value="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
+    <option name="LAST_COMMIT_MESSAGE" value="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
   </component>
 </project>
