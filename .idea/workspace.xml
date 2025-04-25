@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads user filtering on transaction history as well, not only in add income/expense functions.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -191,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745517933492</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="ads user filtering on transaction history as well, not only in add income/expense functions.">
+      <option name="closed" value="true" />
+      <created>1745518359292</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1745518359292</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,6 +227,7 @@
     <MESSAGE value="ads tests changed name of branches" />
     <MESSAGE value="fixes CI issues" />
     <MESSAGE value="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
-    <option name="LAST_COMMIT_MESSAGE" value="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
+    <MESSAGE value="ads user filtering on transaction history as well, not only in add income/expense functions." />
+    <option name="LAST_COMMIT_MESSAGE" value="ads user filtering on transaction history as well, not only in add income/expense functions." />
   </component>
 </project>
