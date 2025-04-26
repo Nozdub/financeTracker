@@ -47,10 +47,8 @@ pytest
 
 ## 📝 Future Features
 
-- Dashboard with visual summaries (balance, upcoming, history)
-- Custom category management
-- CSV export and import
-- Budgeting goals
+For a detailed roadmap of planned improvements, see [FUTURE_PLANS.md](FUTURE_PLANS.md).
+
 
 ---
 
