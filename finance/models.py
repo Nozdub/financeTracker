@@ -17,6 +17,8 @@ FREQUENCY_CHOICES = [
 class Category(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=20)  # income or expense
+    is_predefined = models.BooleanField(default=False)
+    is_default = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} ({self.type})"
