@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads READMY text.">
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Updates README file as well as adding a future plans file to give a more detailed walkthrough of what's coming.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/templates/finance/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745609664518</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Updates README file as well as adding a future plans file to give a more detailed walkthrough of what's coming.">
+      <option name="closed" value="true" />
+      <created>1745690665202</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1745690665202</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -237,6 +251,7 @@
     <MESSAGE value="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
     <MESSAGE value="ads user filtering on transaction history as well, not only in add income/expense functions." />
     <MESSAGE value="ads READMY text." />
-    <option name="LAST_COMMIT_MESSAGE" value="ads READMY text." />
+    <MESSAGE value="Updates README file as well as adding a future plans file to give a more detailed walkthrough of what's coming." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates README file as well as adding a future plans file to give a more detailed walkthrough of what's coming." />
   </component>
 </project>
