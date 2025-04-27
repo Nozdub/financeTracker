@@ -7,7 +7,7 @@ from .forms import RegisterForm, IncomeForm
 from .forms import ExpenseForm
 from django.utils.timezone import now
 from datetime import timedelta
-from django.db.models import Value, CharField
+from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField
 
 from .utils import calculate_balance
 
@@ -115,14 +115,14 @@ def home(request):
     displayed_balance = calculate_balance(request.user)
 
     # Get expenses
-    expenses = Expense.objects.filter(user=request.user).annotate(type=Value('Expense', output_field=CharField())
-                                                                  ).values('id', 'date', 'amount', 'description',
-                                                                           'category__name', 'type')
+    expenses = Expense.objects.filter(user=request.user).annotate(
+        type=Value('Expense', output_field=CharField())).values('id', 'date', 'amount', 'description',
+                                                                'category__name', 'type')
 
     # Get incomes
-    incomes = Income.objects.filter(user=request.user).annotate(type=Value('Income', output_field=CharField())
-                                                                ).values('id', 'date', 'amount', 'description',
-                                                                         'category__name', 'type')
+    incomes = Income.objects.filter(user=request.user).annotate(
+        type=Value('Income', output_field=CharField())).values('id', 'date', 'amount', 'description',
+                                                               'category__name', 'type')
 
     # Merge incomes and transactions
     transactions = incomes.union(expenses).order_by('-date')[:5]
