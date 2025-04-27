@@ -7,6 +7,7 @@ from .forms import RegisterForm, IncomeForm
 from .forms import ExpenseForm
 from django.utils.timezone import now
 from datetime import timedelta
+from django.db.models import Value, CharField
 
 from .utils import calculate_balance
 
@@ -78,7 +79,7 @@ def register(request):
     else:
         form = RegisterForm()
 
-    return render(request, "finance/register.html",  {"form": form})
+    return render(request, "finance/register.html", {"form": form})
 
 
 def add_expense(request):
@@ -113,41 +114,21 @@ def add_income(request):
 def home(request):
     displayed_balance = calculate_balance(request.user)
 
-    recent_expenses = Expense.objects.filter(user=request.user).order_by('-date')[:5]
-    recent_incomes = Income.objects.filter(user=request.user).order_by('-date')[:5]
+    # Get expenses
+    expenses = Expense.objects.filter(user=request.user).annotate(type=Value('Expense', output_field=CharField())
+                                                                  ).values('id', 'date', 'amount', 'description',
+                                                                           'category__name', 'type')
 
-    # Merge and sort transactions by date
-    recent_transactions = []
-    for income in recent_incomes:
-        recent_transactions.append({
-            "id": income.id,
-            "date": income.date,
-            "type": "Income",
-            "amount": income.amount,
-            "description": income.description,
-            "category": income.category.name,
-        })
+    # Get incomes
+    incomes = Income.objects.filter(user=request.user).annotate(type=Value('Income', output_field=CharField())
+                                                                ).values('id', 'date', 'amount', 'description',
+                                                                         'category__name', 'type')
 
-    for expense in recent_expenses:
-        recent_transactions.append({
-            "id": expense.id,
-            "date": expense.date,
-            "type": "Expense",
-            "amount": -abs(expense.amount),
-            "description": expense.description,
-            "category": expense.category.name,
-        })
-
-    # Sort combined list by date, newest first
-    recent_transactions.sort(key=lambda tx: tx["date"], reverse=True)
-
-    # Take only the top 5
-    recent_transactions = recent_transactions[:5]
+    # Merge incomes and transactions
+    transactions = incomes.union(expenses).order_by('-date')[:5]
 
     return render(request, "finance/home.html", {
         "displayed_balance": displayed_balance,
-        "recent_transactions": recent_transactions,
+        "recent_transactions": transactions
+
     })
-
-
-
