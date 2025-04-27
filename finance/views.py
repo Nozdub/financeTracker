@@ -8,6 +8,8 @@ from .forms import ExpenseForm
 from django.utils.timezone import now
 from datetime import timedelta
 
+from .utils import calculate_balance
+
 
 # Create your views here.
 
@@ -109,4 +111,43 @@ def add_income(request):
 
 @login_required
 def home(request):
-    return render(request, "finance/home.html")
+    displayed_balance = calculate_balance(request.user)
+
+    recent_expenses = Expense.objects.filter(user=request.user).order_by('-date')[:5]
+    recent_incomes = Income.objects.filter(user=request.user).order_by('-date')[:5]
+
+    # Merge and sort transactions by date
+    recent_transactions = []
+    for income in recent_incomes:
+        recent_transactions.append({
+            "id": income.id,
+            "date": income.date,
+            "type": "Income",
+            "amount": income.amount,
+            "description": income.description,
+            "category": income.category.name,
+        })
+
+    for expense in recent_expenses:
+        recent_transactions.append({
+            "id": expense.id,
+            "date": expense.date,
+            "type": "Expense",
+            "amount": -abs(expense.amount),
+            "description": expense.description,
+            "category": expense.category.name,
+        })
+
+    # Sort combined list by date, newest first
+    recent_transactions.sort(key=lambda tx: tx["date"], reverse=True)
+
+    # Take only the top 5
+    recent_transactions = recent_transactions[:5]
+
+    return render(request, "finance/home.html", {
+        "displayed_balance": displayed_balance,
+        "recent_transactions": recent_transactions,
+    })
+
+
+

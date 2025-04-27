@@ -3,4 +3,61 @@
 {% block content %}
 <h2>Welcome to your Finance Tracker!</h2>
 <p>Use the navigation links above to manage your expenses.</p>
+
+<hr>
+
+<!-- Graph placeholders -->
+<div style="display: flex; justify-content: space-around; margin: 2rem 0;">
+    <div style="width: 30%; height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+        Graph 1 (Coming Soon)
+    </div>
+    <div style="width: 30%; height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+        Graph 2 (Coming Soon)
+    </div>
+    <div style="width: 30%; height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+        Graph 3 (Coming Soon)
+    </div>
+</div>
+
+<hr>
+
+<!-- Balance section -->
+<div style="text-align: center; margin: 2rem 0;">
+    <h2>Current Balance</h2>
+    <p style="font-size: 2rem; font-weight: bold; color: {% if displayed_balance >= 0 %}green{% else %}red{% endif %};">
+        {{ displayed_balance }} €
+    </p>
+</div>
+
+<hr>
+
+<div class="container">
+    <h2>Recent Transactions</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Date</th>
+                <th style="text-align: left;">Type</th>
+                <th style="text-align: left;">Description</th>
+                <th style="text-align: right;">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tx in recent_transactions %}
+            <tr>
+                <td>{{ tx.date|date:"Y-m-d" }}</td>
+                <td>{{ tx.type }}</td>
+                <td>{{ tx.description }}</td>
+                <td style="text-align: right; color: {% if tx.amount >= 0 %}green{% else %}red{% endif %};">
+                    {{ tx.amount }} €
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align:center;">No recent transactions.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

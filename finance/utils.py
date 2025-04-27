@@ -87,3 +87,16 @@ def calculate_running_total(transactions: list[dict]) -> list[dict]:
         total += tx["amount"]
         tx["running_total"] = total
     return transactions
+
+
+def calculate_balance(user):
+    incomes = Income.objects.filter(user=user)
+    expenses = Expense.objects.filter(user=user)
+
+    total_income = sum(income.amount for income in incomes)
+    total_expenses = sum(expense.amount for expense in expenses)
+
+    return total_income - total_expenses
+
+
+
