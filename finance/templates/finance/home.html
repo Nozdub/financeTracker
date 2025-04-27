@@ -48,8 +48,8 @@
                 <td>{{ tx.date|date:"Y-m-d" }}</td>
                 <td>{{ tx.type }}</td>
                 <td>{{ tx.description }}</td>
-                <td style="text-align: right; color: {% if tx.amount >= 0 %}green{% else %}red{% endif %};">
-                    {{ tx.amount }} €
+                <td style="text-align: right; color: {% if tx.adjusted_amount >= 0 %}green{% else %}red{% endif %};">
+                    {{ tx.adjusted_amount }} €
                 </td>
             </tr>
             {% empty %}
