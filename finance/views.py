@@ -7,10 +7,10 @@ from .forms import RegisterForm, IncomeForm
 from .forms import ExpenseForm
 from django.utils.timezone import now
 from datetime import timedelta
-from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField
+from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField, Sum
 
 from .utils import calculate_balance
-
+import json
 
 # Create your views here.
 
@@ -114,22 +114,34 @@ def add_income(request):
 def home(request):
     displayed_balance = calculate_balance(request.user)
 
-    # Get expenses
     expenses = Expense.objects.filter(user=request.user).annotate(
         type=Value('Expense', output_field=CharField()),
         adjusted_amount=ExpressionWrapper(F('amount') * -1, output_field=FloatField())
     ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
 
-    # Get incomes
     incomes = Income.objects.filter(user=request.user).annotate(
         type=Value('Income', output_field=CharField()),
         adjusted_amount=F('amount')
     ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
 
-    # Merge incomes and transactions
     transactions = incomes.union(expenses).order_by('-date')[:5]
+
+    category_totals = Expense.objects.filter(user=request.user).values('category__name').annotate(
+        total=Sum('amount')
+    ).order_by('-total')
+
+    category_labels = [item['category__name'] for item in category_totals]
+    category_data = [item['total'] for item in category_totals]
+
+    # 🔥 SERIALIZE before sending to frontend
+    category_labels = json.dumps(category_labels)
+    category_data = json.dumps(category_data)
 
     return render(request, "finance/home.html", {
         "displayed_balance": displayed_balance,
-        "recent_transactions": transactions
+        "recent_transactions": transactions,
+        "category_labels": category_labels,
+        "category_data": category_data,
     })
+
+

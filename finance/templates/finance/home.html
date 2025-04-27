@@ -8,8 +8,8 @@
 
 <!-- Graph placeholders -->
 <div style="display: flex; justify-content: space-around; margin: 2rem 0;">
-    <div style="width: 30%; height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
-        Graph 1 (Coming Soon)
+    <div style="width: 30%; height: 150px;">
+        <canvas id="expensePieChart"></canvas>
     </div>
     <div style="width: 30%; height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
         Graph 2 (Coming Soon)
@@ -31,6 +31,7 @@
 
 <hr>
 
+<!-- Recent Transactions -->
 <div class="container">
     <h2>Recent Transactions</h2>
     <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
@@ -60,4 +61,34 @@
         </tbody>
     </table>
 </div>
+
+<!-- 🔥 Place Chart.js Script INSIDE block content -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('expensePieChart').getContext('2d');
+    const expensePieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: {{ category_labels|safe }},
+            datasets: [{
+                label: 'Expenses by Category',
+                data: {{ category_data|safe }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                ],
+                borderColor: 'white',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+    });
+</script>
+
 {% endblock %}
