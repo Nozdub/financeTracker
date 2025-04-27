@@ -116,13 +116,15 @@ def home(request):
 
     # Get expenses
     expenses = Expense.objects.filter(user=request.user).annotate(
-        type=Value('Expense', output_field=CharField())).values('id', 'date', 'amount', 'description',
-                                                                'category__name', 'type')
+        type=Value('Expense', output_field=CharField()),
+        adjusted_amount=ExpressionWrapper(F('amount') * -1, output_field=FloatField())
+    ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
 
     # Get incomes
     incomes = Income.objects.filter(user=request.user).annotate(
-        type=Value('Income', output_field=CharField())).values('id', 'date', 'amount', 'description',
-                                                               'category__name', 'type')
+        type=Value('Income', output_field=CharField()),
+        adjusted_amount=F('amount')
+    ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
 
     # Merge incomes and transactions
     transactions = incomes.union(expenses).order_by('-date')[:5]
@@ -130,5 +132,4 @@ def home(request):
     return render(request, "finance/home.html", {
         "displayed_balance": displayed_balance,
         "recent_transactions": transactions
-
     })
