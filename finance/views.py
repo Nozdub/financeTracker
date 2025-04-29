@@ -5,28 +5,30 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .forms import RegisterForm, IncomeForm
 from .forms import ExpenseForm
-from django.utils.timezone import now
-from datetime import timedelta
+from django.utils.timezone import now, make_aware, get_current_timezone
+from datetime import timedelta, time
 from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField, Sum
 
 from .utils import calculate_balance
 import json
+
 
 # Create your views here.
 
 
 @login_required()
 def transaction_history(request):
-    transactions = []  # List that holds transactions
-    today = now()
+    transactions = []
+    now_time = now()
 
-    incomes = Income.objects.filter(user=request.user, date__lte=today)
-    expenses = Expense.objects.filter(user=request.user, date__lte=today)
+    # Force timezone-aware comparisons
+    incomes = Income.objects.filter(user=request.user, date__lte=now_time)
+    expenses = Expense.objects.filter(user=request.user, date__lte=now_time)
 
     upcoming_expenses = Expense.objects.filter(
         user=request.user,
-        date__gt=today,
-        date__lte=today + timedelta(days=7),
+        date__gt=now_time,
+        date__lte=now_time + timedelta(days=7),
         recurring=True
     ).order_by("date")
 
@@ -52,16 +54,16 @@ def transaction_history(request):
             "running_total": 0
         })
 
-    # ✅ STEP 1: Sort oldest → newest for running total
+    # STEP 1: Sort oldest → newest for running total
     transactions.sort(key=lambda tx: (tx["date"], tx["id"]))
 
-    # ✅ STEP 2: Calculate running total in that order
+    # STEP 2: Calculate running total in that order
     total = 0.0
     for tx in transactions:
         total += tx["amount"]
         tx["running_total"] = total
 
-    # ✅ STEP 3: Sort newest → oldest for display
+    # STEP 3: Sort newest → oldest for display
     transactions.sort(key=lambda tx: (tx["date"], tx["id"]), reverse=True)
 
     return render(request, 'finance/transaction_history.html', {
@@ -87,6 +89,14 @@ def add_expense(request):
         form = ExpenseForm(request.POST)
         if form.is_valid():
             expense = form.save(commit=False)
+            if expense.date.time() == time(0, 0):
+                expense.date = make_aware(
+                    now().replace(
+                        year=expense.date.year,
+                        month=expense.date.month,
+                        day=expense.date.day
+                    )
+                )
             expense.user = request.user
             expense.save()
             return redirect("transaction_history")
@@ -101,6 +111,14 @@ def add_income(request):
         form = IncomeForm(request.POST)
         if form.is_valid():
             income = form.save(commit=False)
+            if income.date.time() == time(0, 0):
+                income.date = make_aware(
+                    now().replace(
+                        year=income.date.year,
+                        month=income.date.month,
+                        day=income.date.day
+                    )
+                )
             income.user = request.user
             income.save()
             return redirect("transaction_history")
@@ -126,14 +144,14 @@ def home(request):
 
     transactions = incomes.union(expenses).order_by('-date')[:5]
 
-    category_totals = Expense.objects.filter(user=request.user).values('category__name').annotate(
-        total=Sum('amount')
-    ).order_by('-total')
+    category_totals = Expense.objects.filter(user=request.user, category__type="expense"
+                                             ).values('category__name').annotate(total=Sum('amount')
+                                                                                 ).order_by('total')
 
     category_labels = [item['category__name'] for item in category_totals]
     category_data = [item['total'] for item in category_totals]
 
-    # 🔥 SERIALIZE before sending to frontend
+    # Serialize before sending to frontend
     category_labels = json.dumps(category_labels)
     category_data = json.dumps(category_data)
 
@@ -143,5 +161,3 @@ def home(request):
         "category_labels": category_labels,
         "category_data": category_data,
     })
-
-
