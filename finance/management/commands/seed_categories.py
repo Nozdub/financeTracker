@@ -7,20 +7,23 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         predefined_categories = [
-            "Salary",
-            "Mortgage",
-            "Groceries",
-            "Utilities",
-            "Entertainment",
-            "Transportation",
-            "Healthcare",
-            "Savings",
-            "Investments",
-            "Miscellaneous",
+            {"name": "Salary", "type": "income"},
+            {"name": "Mortgage", "type": "expense"},
+            {"name": "Groceries", "type": "expense"},
+            {"name": "Utilities", "type": "expense"},
+            {"name": "Entertainment", "type": "expense"},
+            {"name": "Transportation", "type": "expense"},
+            {"name": "Healthcare", "type": "expense"},
+            {"name": "Savings", "type": "income"},
+            {"name": "Investments", "type": "income"},
+            {"name": "Miscellaneous", "type": "expense"},
         ]
 
-        for name in predefined_categories:
-            Category.objects.get_or_create(name=name, defaults={"is_predefined": True})
+        for cat in predefined_categories:
+            Category.objects.update_or_create(
+                name=cat["name"],
+                defaults={"is_predefined": True, "type": cat["type"]},
+            )
 
-        self.stdout.write(self.style.SUCCESS('Predefined categories created or already exist!'))
+        self.stdout.write(self.style.SUCCESS('Predefined categories updated correctly!'))
 
