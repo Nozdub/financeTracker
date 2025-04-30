@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from .models import RecurringRule, Income, Expense
 from django.utils.timezone import now
 
@@ -98,5 +98,40 @@ def calculate_balance(user):
 
     return total_income - total_expenses
 
+
+def get_next_due_date(start_date, frequency):
+    today = now().date()
+    current = start_date.date()
+
+    while current <= today:
+        if frequency == "daily":
+            current += timedelta(days=1)
+        elif frequency == "weekly":
+            current += timedelta(weeks=1)
+        elif frequency == "biweekly":
+            current += timedelta(weeks=2)
+        elif frequency == "monthly":
+            if current.month == 12:
+                current = current.replace(year=current.year + 1, month=1)
+            else:
+                current = current.replace(month=current.month + 1)
+        elif frequency == "quarterly":
+            # Add 3 months
+            new_month = current.month + 3
+            new_year = current.year + (new_month - 1) // 12
+            new_month = (new_month - 1) % 12 + 1
+            current = current.replace(year=new_year, month=new_month)
+        elif frequency == "semiannual":
+            # Add 6 months
+            new_month = current.month + 6
+            new_year = current.year + (new_month - 1) // 12
+            new_month = (new_month - 1) % 12 + 1
+            current = current.replace(year=new_year, month=new_month)
+        elif frequency == "yearly":
+            current = current.replace(year=current.year + 1)
+        else:
+            break
+
+    return current
 
 

@@ -1,16 +1,15 @@
-from operator import itemgetter
-
-from .models import Income, Expense
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
-from .forms import RegisterForm, IncomeForm
-from .forms import ExpenseForm
-from django.utils.timezone import now, make_aware, get_current_timezone
-from datetime import timedelta, time
-from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField, Sum
-
-from .utils import calculate_balance
 import json
+from datetime import timedelta, time, datetime, timezone, date
+
+from django.contrib.auth.decorators import login_required
+from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField, Sum
+from django.shortcuts import redirect, render
+from django.utils.timezone import now
+
+from .forms import ExpenseForm
+from .forms import RegisterForm, IncomeForm
+from .models import Income, Expense
+from .utils import calculate_balance, get_next_due_date
 
 
 # Create your views here.
@@ -19,18 +18,10 @@ import json
 @login_required()
 def transaction_history(request):
     transactions = []
-    now_time = now()
+    today = date.today()
 
-    # Force timezone-aware comparisons
-    incomes = Income.objects.filter(user=request.user, date__lte=now_time)
-    expenses = Expense.objects.filter(user=request.user, date__lte=now_time)
-
-    upcoming_expenses = Expense.objects.filter(
-        user=request.user,
-        date__gt=now_time,
-        date__lte=now_time + timedelta(days=7),
-        recurring=True
-    ).order_by("date")
+    expenses = Expense.objects.filter(user=request.user, date__date__lte=today)
+    incomes = Income.objects.filter(user=request.user, date__date__lte=today)
 
     for income in incomes:
         transactions.append({
@@ -54,22 +45,64 @@ def transaction_history(request):
             "running_total": 0
         })
 
-    # STEP 1: Sort oldest → newest for running total
-    transactions.sort(key=lambda tx: (tx["date"], tx["id"]))
+    # Upcoming recurring expenses handling
+    upcoming_expenses = []
+    future_recurring = Expense.objects.filter(user=request.user, recurring=True)
 
-    # STEP 2: Calculate running total in that order
+    for expense in future_recurring:
+        next_due = get_next_due_date(expense.date, expense.frequency)
+
+        if today < next_due <= (today + timedelta(days=7)):
+            upcoming_expenses.append({
+                "id": expense.id,
+                "date": next_due,
+                "type": "Expense",
+                "amount": -abs(expense.amount),
+                "description": expense.description,
+                "category": expense.category.name,
+            })
+
+    # Sort and calculate running total
+    transactions.sort(key=lambda tx: (tx["date"], tx["id"]))
     total = 0.0
     for tx in transactions:
         total += tx["amount"]
         tx["running_total"] = total
-
-    # STEP 3: Sort newest → oldest for display
     transactions.sort(key=lambda tx: (tx["date"], tx["id"]), reverse=True)
 
     return render(request, 'finance/transaction_history.html', {
         'transactions': transactions,
-        'upcoming_expenses': upcoming_expenses
+        'upcoming_expenses': upcoming_expenses,
     })
+
+
+def add_transaction(request, form_class, template_name, redirect_name):
+    if request.method == "POST":
+        form = form_class(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            if instance.date.time() == time(0, 0):
+                current_time = now().time()
+                instance.date = instance.date.replace(
+                    hour=current_time.hour,
+                    minute=current_time.minute,
+                    second=current_time.second,
+                    microsecond=current_time.microsecond
+                )
+            instance.user = request.user
+            instance.save()
+            return redirect(redirect_name)
+    else:
+        form = form_class()
+    return render(request, template_name, {"form": form})
+
+
+def add_income(request):
+    return add_transaction(request, IncomeForm, "finance/add_income.html", "transaction_history")
+
+
+def add_expense(request):
+    return add_transaction(request, ExpenseForm, "finance/add_expense.html", "transaction_history")
 
 
 def register(request):
@@ -85,56 +118,16 @@ def register(request):
 
 
 @login_required
-def add_expense(request):
-    form = ExpenseForm(request.POST or None)
-    if form.is_valid():
-        expense = form.save(commit=False)
-        if expense.date and expense.date.time() == time(0, 0):
-            today_now = now()
-            expense.date = expense.date.replace(
-                hour=today_now.hour,
-                minute=today_now.minute,
-                second=today_now.second,
-                microsecond=today_now.microsecond,
-            )
-        expense.user = request.user
-        expense.save()
-        return redirect("transaction_history")
-
-    return render(request, "finance/add_expense.html", {"form": form})
-
-
-
-@login_required
-def add_income(request):
-    form = IncomeForm(request.POST or None)
-    if form.is_valid():
-        income = form.save(commit=False)
-        if income.date and income.date.time() == time(0, 0):
-            today_now = now()
-            income.date = income.date.replace(
-                hour=today_now.hour,
-                minute=today_now.minute,
-                second=today_now.second,
-                microsecond=today_now.microsecond,
-            )
-        income.user = request.user
-        income.save()
-        return redirect("transaction_history")
-
-    return render(request, "finance/add_income.html", {"form": form})
-
-
-@login_required
 def home(request):
     displayed_balance = calculate_balance(request.user)
+    today = date.today()
 
-    expenses = Expense.objects.filter(user=request.user).annotate(
+    expenses = Expense.objects.filter(user=request.user, date__date__lte=today).annotate(
         type=Value('Expense', output_field=CharField()),
         adjusted_amount=ExpressionWrapper(F('amount') * -1, output_field=FloatField())
     ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
 
-    incomes = Income.objects.filter(user=request.user).annotate(
+    incomes = Income.objects.filter(user=request.user, date__date__lte=today).annotate(
         type=Value('Income', output_field=CharField()),
         adjusted_amount=F('amount')
     ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
