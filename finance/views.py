@@ -84,46 +84,43 @@ def register(request):
     return render(request, "finance/register.html", {"form": form})
 
 
+@login_required
 def add_expense(request):
-    if request.method == "POST":
-        form = ExpenseForm(request.POST)
-        if form.is_valid():
-            expense = form.save(commit=False)
-            if expense.date.time() == time(0, 0):
-                expense.date = make_aware(
-                    now().replace(
-                        year=expense.date.year,
-                        month=expense.date.month,
-                        day=expense.date.day
-                    )
-                )
-            expense.user = request.user
-            expense.save()
-            return redirect("transaction_history")
-    else:
-        form = ExpenseForm()
+    form = ExpenseForm(request.POST or None)
+    if form.is_valid():
+        expense = form.save(commit=False)
+        if expense.date and expense.date.time() == time(0, 0):
+            today_now = now()
+            expense.date = expense.date.replace(
+                hour=today_now.hour,
+                minute=today_now.minute,
+                second=today_now.second,
+                microsecond=today_now.microsecond,
+            )
+        expense.user = request.user
+        expense.save()
+        return redirect("transaction_history")
 
     return render(request, "finance/add_expense.html", {"form": form})
 
 
+
+@login_required
 def add_income(request):
-    if request.method == "POST":
-        form = IncomeForm(request.POST)
-        if form.is_valid():
-            income = form.save(commit=False)
-            if income.date.time() == time(0, 0):
-                income.date = make_aware(
-                    now().replace(
-                        year=income.date.year,
-                        month=income.date.month,
-                        day=income.date.day
-                    )
-                )
-            income.user = request.user
-            income.save()
-            return redirect("transaction_history")
-    else:
-        form = IncomeForm()
+    form = IncomeForm(request.POST or None)
+    if form.is_valid():
+        income = form.save(commit=False)
+        if income.date and income.date.time() == time(0, 0):
+            today_now = now()
+            income.date = income.date.replace(
+                hour=today_now.hour,
+                minute=today_now.minute,
+                second=today_now.second,
+                microsecond=today_now.microsecond,
+            )
+        income.user = request.user
+        income.save()
+        return redirect("transaction_history")
 
     return render(request, "finance/add_income.html", {"form": form})
 
