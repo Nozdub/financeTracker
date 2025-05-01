@@ -122,6 +122,7 @@ def home(request):
     displayed_balance = calculate_balance(request.user)
     today = date.today()
 
+    # Recent 5 transactions (income + expenses)
     expenses = Expense.objects.filter(user=request.user, date__date__lte=today).annotate(
         type=Value('Expense', output_field=CharField()),
         adjusted_amount=ExpressionWrapper(F('amount') * -1, output_field=FloatField())
@@ -134,20 +135,36 @@ def home(request):
 
     transactions = incomes.union(expenses).order_by('-date')[:5]
 
+    # Pie chart: spending per category
     category_totals = Expense.objects.filter(user=request.user, category__type="expense"
-                                             ).values('category__name').annotate(total=Sum('amount')
-                                                                                 ).order_by('total')
+                        ).values('category__name'
+                        ).annotate(total=Sum('amount')
+                        ).order_by('total')
 
     category_labels = [item['category__name'] for item in category_totals]
     category_data = [item['total'] for item in category_totals]
 
-    # Serialize before sending to frontend
-    category_labels = json.dumps(category_labels)
-    category_data = json.dumps(category_data)
+    # Bar chart: expenses by day (past 7 days)
+    last_week = today - timedelta(days=6)
+    daily_expenses = Expense.objects.filter(user=request.user, date__date__gte=last_week
+                    ).annotate(day=F('date__date')
+                    ).values('day'
+                    ).annotate(total=Sum('amount')
+                    ).order_by('day')
+
+    bar_labels = []
+    bar_data = []
+    for i in range(7):
+        current_day = last_week + timedelta(days=i)
+        bar_labels.append(current_day.strftime("%Y-%m-%d"))
+        day_data = next((item['total'] for item in daily_expenses if item['day'] == current_day), 0)
+        bar_data.append(float(day_data))
 
     return render(request, "finance/home.html", {
         "displayed_balance": displayed_balance,
         "recent_transactions": transactions,
-        "category_labels": category_labels,
-        "category_data": category_data,
+        "category_labels": json.dumps(category_labels),
+        "category_data": json.dumps(category_data),
+        "bar_labels": json.dumps(bar_labels),
+        "bar_data": json.dumps(bar_data),
     })
