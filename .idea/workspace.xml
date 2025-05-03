@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Ads line chart to the dashboard">
-      <change afterPath="$PROJECT_DIR$/finance/templates/finance/manage_categories.html" afterDir="false" />
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/templates/finance/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/templates/finance/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -303,7 +300,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746264375336</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones).">
+      <option name="closed" value="true" />
+      <created>1746267351671</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1746267351671</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -341,6 +346,7 @@
     <MESSAGE value="Fixes pie chart&#10;- Refactored add expense/income into a general function that can take different forms of transactions." />
     <MESSAGE value="Ads bar chart in graph section 2" />
     <MESSAGE value="Ads line chart to the dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ads line chart to the dashboard" />
+    <MESSAGE value="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones)." />
+    <option name="LAST_COMMIT_MESSAGE" value="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones)." />
   </component>
 </project>

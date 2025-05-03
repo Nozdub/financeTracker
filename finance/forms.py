@@ -10,20 +10,20 @@ class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expense
         fields = ["date", "amount", "description", "category", "recurring", "frequency"]
-        widgets = {
-            "date": DateTimeInput(attrs={"type": "datetime-local"}),
-            "amount": NumberInput(attrs={"step": "0.01", "placeholder": "e.g. 123.45"}),
-        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(type="expense")
 
 
 class IncomeForm(forms.ModelForm):
     class Meta:
         model = Income
         fields = ["date", "amount", "description", "category", "recurring", "frequency"]
-        widgets = {
-            "date": DateTimeInput(attrs={"type": "datetime-local"}),
-            "amount": NumberInput(attrs={"step": "0.01", "placeholder": "e.g. 123.45"}),
-        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].queryset = Category.objects.filter(type="income")
 
 
 class RegisterForm(UserCreationForm):

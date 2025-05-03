@@ -138,12 +138,26 @@ def home(request):
 
     # Pie chart: spending per category
     category_totals = Expense.objects.filter(user=request.user, category__type="expense"
-                        ).values('category__name'
-                        ).annotate(total=Sum('amount')
-                        ).order_by('total')
+                                             ).values('category__name'
+                                                      ).annotate(total=Sum('amount')
+                                                                 ).order_by('-total')
 
     category_labels = [item['category__name'] for item in category_totals]
     category_data = [item['total'] for item in category_totals]
+
+    # Assign consistent colors to categories
+    base_colors = [
+        'rgba(255, 99, 132, 0.7)',  # red
+        'rgba(54, 162, 235, 0.7)',  # blue
+        'rgba(255, 206, 86, 0.7)',  # yellow
+        'rgba(75, 192, 192, 0.7)',  # teal
+        'rgba(153, 102, 255, 0.7)',  # purple
+        'rgba(255, 159, 64, 0.7)',  # orange
+        'rgba(100, 100, 255, 0.7)',  # custom blue
+        'rgba(200, 200, 0, 0.7)',  # custom yellow
+    ]
+    category_colors = base_colors[:len(category_labels)]
+    category_legend = zip(category_labels, category_colors)
 
     # Bar chart: expenses by day (past 7 days)
     last_week = today - timedelta(days=6)
@@ -175,18 +189,25 @@ def home(request):
         line_income_data.append(day_income)
         line_expense_data.append(day_expense)
 
+    top3_labels = category_labels[:3]
+    top3_data = category_data[:3]
+
     return render(request, "finance/home.html", {
         "displayed_balance": displayed_balance,
         "recent_transactions": transactions,
         "category_labels": json.dumps(category_labels),
         "category_data": json.dumps(category_data),
+        "category_colors": json.dumps(category_colors),
+        "category_legend": category_legend,  # 👈 used for HTML labels
         "bar_labels": json.dumps(bar_labels),
         "bar_data": json.dumps(bar_data),
         "line_labels": json.dumps(line_labels),
         "line_income_data": json.dumps(line_income_data),
         "line_expense_data": json.dumps(line_expense_data),
+        "top3_labels": json.dumps(top3_labels),
+        "top3_data": json.dumps(top3_data),
+        "current_month_year": today.strftime("%B %Y")
     })
-
 
 @login_required
 def manage_categories(request):
