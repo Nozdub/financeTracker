@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import DateInput, NumberInput, DateTimeInput
 
-from .models import Expense, Income
+from .models import Expense, Income, Category
 
 
 class ExpenseForm(forms.ModelForm):
@@ -33,4 +33,17 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', 'type']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'e.g. Books'}),
+            'type': forms.Select(choices=[('income', 'Income'), ('expense', 'Expense')]),
+        }
+
+    def __init__(self,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['type'].label = "Category Type"
 

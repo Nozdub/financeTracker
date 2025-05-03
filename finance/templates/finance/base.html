@@ -83,6 +83,7 @@ th, td {
     <a href="{% url 'add_expense' %}">Add Expense</a> |
     <a href="{% url 'add_income' %}">Add Income</a> |
     <a href="{% url 'transaction_history' %}">Transaction History</a> |
+    <a href="{% url 'manage_categories' %}">Manage Categories</a> |
     <form action="{% url 'logout' %}" method="post" style="display:inline;">
   {% csrf_token %}
   <button type="submit" style="background:none; border:none; color: #007BFF; cursor:pointer; padding:0; font:inherit;">

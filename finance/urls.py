@@ -9,5 +9,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('add-expense/', views.add_expense, name='add_expense'),
     path('add-income/', views.add_income, name='add_income'),
+    path("categories/", views.manage_categories, name="manage_categories"),
+    path("delete-category/<int:category_id>/", views.delete_category, name="delete_category"),
+
+
 
 ]

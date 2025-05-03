@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Ads bar chart in graph section 2">
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Ads line chart to the dashboard">
+      <change afterPath="$PROJECT_DIR$/finance/templates/finance/manage_categories.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/templates/finance/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/templates/finance/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -291,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746111538714</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Ads line chart to the dashboard">
+      <option name="closed" value="true" />
+      <created>1746264375336</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1746264375336</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -328,6 +340,7 @@
     <MESSAGE value="Fixes pie chart&#10;- Resolves issues of transactions not showing up in transaction history due to timestamp sorting" />
     <MESSAGE value="Fixes pie chart&#10;- Refactored add expense/income into a general function that can take different forms of transactions." />
     <MESSAGE value="Ads bar chart in graph section 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ads bar chart in graph section 2" />
+    <MESSAGE value="Ads line chart to the dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ads line chart to the dashboard" />
   </component>
 </project>
