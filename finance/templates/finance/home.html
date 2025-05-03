@@ -14,8 +14,8 @@
     <div style="width: 30%; height: 150px;">
     <canvas id="barSpendingChart"></canvas>
     </div>
-    <div style="width: 30%; height: 150px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
-        Graph 3 (Coming Soon)
+    <div style="width: 30%; height: 150px;">
+    <canvas id="lineChart"></canvas>
     </div>
 </div>
 
@@ -118,5 +118,45 @@
         }
     });
 </script>
+
+<script>
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    const lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: {{ line_labels|safe }},
+            datasets: [
+                {
+                    label: 'Income',
+                    data: {{ line_income_data|safe }},
+                    borderColor: 'green',
+                    backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                    tension: 0.2
+                },
+                {
+                    label: 'Expense',
+                    data: {{ line_expense_data|safe }},
+                    borderColor: 'red',
+                    backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                    tension: 0.2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return value + " €";
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 
 {% endblock %}
