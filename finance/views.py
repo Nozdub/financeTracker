@@ -160,6 +160,20 @@ def home(request):
         day_data = next((item['total'] for item in daily_expenses if item['day'] == current_day), 0)
         bar_data.append(float(day_data))
 
+    # Line chart: income vs expense per day (last 7 days)
+    line_labels = [(today - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(6, -1, -1)]
+    line_income_data = []
+    line_expense_data = []
+
+    for label in line_labels:
+        date_obj = datetime.strptime(label, "%Y-%m-%d").date()
+        day_income = Income.objects.filter(user=request.user, date__date=date_obj).aggregate(total=Sum('amount'))[
+                         'total'] or 0
+        day_expense = Expense.objects.filter(user=request.user, date__date=date_obj).aggregate(total=Sum('amount'))[
+                          'total'] or 0
+        line_income_data.append(day_income)
+        line_expense_data.append(day_expense)
+
     return render(request, "finance/home.html", {
         "displayed_balance": displayed_balance,
         "recent_transactions": transactions,
@@ -167,4 +181,7 @@ def home(request):
         "category_data": json.dumps(category_data),
         "bar_labels": json.dumps(bar_labels),
         "bar_data": json.dumps(bar_data),
+        "line_labels": json.dumps(line_labels),
+        "line_income_data": json.dumps(line_income_data),
+        "line_expense_data": json.dumps(line_expense_data),
     })

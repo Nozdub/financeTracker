@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Fixes pie chart&#10;- Refactored add expense/income into a general function that can take different forms of transactions.">
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Ads bar chart in graph section 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/templates/finance/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -282,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746012486364</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Ads bar chart in graph section 2">
+      <option name="closed" value="true" />
+      <created>1746111538714</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1746111538714</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -318,6 +327,7 @@
     <MESSAGE value="Fixes pie chart&#10;- Resolves issues tied to categories and types (incomes/expenses)&#10;- Resolves transaction history issue tied to timezone" />
     <MESSAGE value="Fixes pie chart&#10;- Resolves issues of transactions not showing up in transaction history due to timestamp sorting" />
     <MESSAGE value="Fixes pie chart&#10;- Refactored add expense/income into a general function that can take different forms of transactions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes pie chart&#10;- Refactored add expense/income into a general function that can take different forms of transactions." />
+    <MESSAGE value="Ads bar chart in graph section 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ads bar chart in graph section 2" />
   </component>
 </project>
