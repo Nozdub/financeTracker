@@ -1,0 +1,48 @@
+{% extends "finance/base.html" %}
+
+{% block title %}Manage Categories{% endblock %}
+
+{% block content %}
+<h2>Manage Your Categories</h2>
+
+<!-- Add New Category Form -->
+<form method="post" style="margin-bottom: 2rem;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Category</button>
+</form>
+
+<!-- Display User Categories -->
+<h3>Your Custom Categories</h3>
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th style="text-align: right;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in user_categories %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>{{ category.type }}</td>
+            <td style="text-align: right;">
+                {% if not category.is_predefined %}
+                <form method="post" action="{% url 'delete_category' category.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="color: red;">Delete</button>
+                </form>
+                {% else %}
+                <em>Predefined</em>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" style="text-align:center;">You haven’t added any categories yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

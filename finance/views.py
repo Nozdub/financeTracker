@@ -1,14 +1,15 @@
 import json
 from datetime import timedelta, time, datetime, timezone, date
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField, Sum
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.timezone import now
 
-from .forms import ExpenseForm
+from .forms import ExpenseForm, CategoryForm
 from .forms import RegisterForm, IncomeForm
-from .models import Income, Expense
+from .models import Income, Expense, Category
 from .utils import calculate_balance, get_next_due_date
 
 
@@ -185,3 +186,35 @@ def home(request):
         "line_income_data": json.dumps(line_income_data),
         "line_expense_data": json.dumps(line_expense_data),
     })
+
+
+@login_required
+def manage_categories(request):
+    user_categories = Category.objects.filter(is_predefined=False)
+
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            new_category = form.save(commit=False)
+            new_category.is_predefined = False
+            new_category.save()
+            return redirect('manage_categories')
+    else:
+        form = CategoryForm
+
+    return render(request, "finance/manage_categories.html", {
+        "form": form,
+        "user_categories": user_categories
+    })
+
+
+@login_required
+def delete_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+
+    if not category.is_predefined:
+        category.delete()
+
+    return redirect("manage_categories")
+
+
