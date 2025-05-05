@@ -102,8 +102,38 @@ def add_income(request):
     return add_transaction(request, IncomeForm, "finance/add_income.html", "transaction_history")
 
 
+def edit_income(request, income_id):
+    income = get_object_or_404(Income, id=income_id, user=request.user)
+    if request.method == "POST":
+        form = IncomeForm(request.POST, instance=income)
+        if form.is_valid():
+            update_income = form.save(commit=False)
+            update_income.user = request.user
+            update_income.save()
+            return redirect("transaction_history")
+    else:
+        form = IncomeForm(instance=income)
+
+    return render(request, "finance/edit_income.html", {"form": form, "income": income})
+
+
 def add_expense(request):
     return add_transaction(request, ExpenseForm, "finance/add_expense.html", "transaction_history")
+
+
+def edit_expense(request, expense_id):
+    expense = get_object_or_404(Expense, id=expense_id, user=request.user)
+    if request.method == "POST":
+        form = ExpenseForm(request.POST, instance=expense)
+        if form.is_valid():
+            update_expense = form.save(commit=False)
+            update_expense.user = request.user
+            update_expense.save()
+            return redirect("transaction_history")
+    else:
+        form = ExpenseForm(instance=expense)
+
+    return render(request, "finance/edit_expense.html", {"form": form, "expense": expense})
 
 
 def register(request):

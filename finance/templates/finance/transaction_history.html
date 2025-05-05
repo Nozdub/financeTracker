@@ -53,6 +53,7 @@
             <th>Category</th>
             <th>Amount</th>
             <th>Running Total</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -65,7 +66,15 @@
             <td>{{ tx.category }}</td>
             <td class="{{ tx.type|lower }}">{{ tx.amount }}</td>
             <td class="total-cell">{{ tx.running_total|floatformat:2 }}</td>
+            <td>
+                {% if tx.type == "Income" %}
+                    <a href="{% url 'edit_income' tx.id %}">Edit</a>
+                {% elif tx.type == "Expense" %}
+                    <a href="{% url 'edit_expense' tx.id %}">Edit</a>
+                {% endif %}
+            </td>
         </tr>
+
         {% empty %}
         <tr>
             <td colspan="7" style="text-align:center;">No transactions found.</td>

@@ -11,6 +11,8 @@ urlpatterns = [
     path('add-income/', views.add_income, name='add_income'),
     path("categories/", views.manage_categories, name="manage_categories"),
     path("delete-category/<int:category_id>/", views.delete_category, name="delete_category"),
+    path('edit-expense/<int:expense_id>/', views.edit_expense, name='edit_expense'),
+    path('edit-income/<int:income_id>/', views.edit_income, name='edit_income'),
 
 
 
