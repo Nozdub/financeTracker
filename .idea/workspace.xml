@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones).">
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="modifies chart setup&#10;ensures legend consistency">
+      <change afterPath="$PROJECT_DIR$/finance/templates/finance/edit_expense.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/finance/templates/finance/edit_income.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finance/templates/finance/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/finance/templates/finance/transaction_history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/finance/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -308,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746267351671</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="modifies chart setup&#10;ensures legend consistency">
+      <option name="closed" value="true" />
+      <created>1746313746957</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1746313746957</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,6 +358,7 @@
     <MESSAGE value="Ads bar chart in graph section 2" />
     <MESSAGE value="Ads line chart to the dashboard" />
     <MESSAGE value="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones)." />
-    <option name="LAST_COMMIT_MESSAGE" value="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones)." />
+    <MESSAGE value="modifies chart setup&#10;ensures legend consistency" />
+    <option name="LAST_COMMIT_MESSAGE" value="modifies chart setup&#10;ensures legend consistency" />
   </component>
 </project>
