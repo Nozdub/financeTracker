@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import DateInput, NumberInput, DateTimeInput
 
 from .models import Expense, Income, Category
 
@@ -10,6 +9,9 @@ class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expense
         fields = ["date", "amount", "description", "category", "recurring", "frequency"]
+        widgets = {
+            "date": forms.DateTimeInput(attrs={"type": "datetime-local"})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -20,6 +22,9 @@ class IncomeForm(forms.ModelForm):
     class Meta:
         model = Income
         fields = ["date", "amount", "description", "category", "recurring", "frequency"]
+        widgets = {
+            "date": forms.DateTimeInput(attrs={"type": "datetime-local"})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
