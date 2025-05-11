@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="ads edit functionality to pre existing transactions.">
-      <change afterPath="$PROJECT_DIR$/finance/management/commands/generate_recurring_expenses.py" afterDir="false" />
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/management/commands/generate_recurring_expenses.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/management/commands/generate_recurring_transactions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -378,7 +380,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746434330925</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily).">
+      <option name="closed" value="true" />
+      <created>1746964966979</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1746964966979</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -393,7 +403,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Setup Django with several initial classes for the project." />
     <MESSAGE value="Ads recurring rule functionality and tested it in shell." />
     <MESSAGE value="ads basic html page and transaction logic.&#10;- Transaction logic faulty due to timestamp handling, fix in next commit." />
     <MESSAGE value="fixed transition total, it now works according to plan." />
@@ -418,6 +427,7 @@
     <MESSAGE value="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones)." />
     <MESSAGE value="modifies chart setup&#10;ensures legend consistency" />
     <MESSAGE value="ads edit functionality to pre existing transactions." />
-    <option name="LAST_COMMIT_MESSAGE" value="ads edit functionality to pre existing transactions." />
+    <MESSAGE value="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily)." />
   </component>
 </project>
