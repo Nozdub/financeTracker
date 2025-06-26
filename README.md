@@ -7,6 +7,14 @@ This is a Django-based personal finance tracker that allows users to:
 - Automatically calculate running balances
 - Use a clean and responsive user interface
 
+To come:
+- Monthly budget planner featuring:
+     - Income
+     - Different expenditures: Obligatories and optionals.
+     - Advice
+     - Rollover suggestions
+ 
+
 ## 🚀 Features
 
 - Register and login/logout securely
