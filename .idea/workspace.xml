@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily).">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finance/management/commands/generate_recurring_expenses.py" beforeDir="false" afterPath="$PROJECT_DIR$/finance/management/commands/generate_recurring_transactions.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2voefRpGYfmXcs8t46H4Evqf9ub" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.financeTracker.executor": "Run",
+    "Python.manage.executor": "Run",
+    "Python.models.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/python projects/financeTracker",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RunManager" selected="Python.manage">
+    <configuration name="financeTracker" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="financeTracker" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (financeTracker)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="financeTracker" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (financeTracker)" />
+      <option name="WORKING_DIRECTORY" value="E:\python projects\financeTracker" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.financeTracker" />
+      <item itemvalue="Python.manage" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-babbdf50b680-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.15989.155" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21a7bcc7-76bb-4e4d-ab57-c661356c8ea0" name="Changes" comment="" />
+      <created>1744815957739</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744815957739</updated>
+    </task>
+    <task id="LOCAL-00001" summary="initial project scaffold">
+      <option name="closed" value="true" />
+      <created>1744821064720</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744821064720</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Setup Django with several initial classes for the project.">
+      <option name="closed" value="true" />
+      <created>1744839655802</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744839655802</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Setup Django with several initial classes for the project.">
+      <option name="closed" value="true" />
+      <created>1744839664430</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744839664430</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Ads recurring rule functionality and tested it in shell.">
+      <option name="closed" value="true" />
+      <created>1744976988335</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1744976988335</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ads basic html page and transaction logic.&#10;- Transaction logic faulty due to timestamp handling, fix in next commit.">
+      <option name="closed" value="true" />
+      <created>1745020875283</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745020875283</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed transition total, it now works according to plan.">
+      <option name="closed" value="true" />
+      <created>1745247636232</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745247636232</updated>
+    </task>
+    <task id="LOCAL-00007" summary="adds default user so that transactions are user bound.">
+      <option name="closed" value="true" />
+      <created>1745311753714</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1745311753714</updated>
+    </task>
+    <task id="LOCAL-00008" summary="adds register user option as well as login, also sorted out user filtered transactions.">
+      <option name="closed" value="true" />
+      <created>1745416925936</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745416925936</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ads tests">
+      <option name="closed" value="true" />
+      <created>1745422206956</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745422206956</updated>
+    </task>
+    <task id="LOCAL-00010" summary="ads tests changed name of branches">
+      <option name="closed" value="true" />
+      <created>1745423000006</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745423000006</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424236202</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424236202</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424648284</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424648284</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424736086</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424736086</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424852897</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424852897</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745424946451</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745424946451</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fixes CI issues">
+      <option name="closed" value="true" />
+      <created>1745425051717</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1745425051717</updated>
+    </task>
+    <task id="LOCAL-00017" summary="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages.">
+      <option name="closed" value="true" />
+      <created>1745517933492</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1745517933492</updated>
+    </task>
+    <task id="LOCAL-00018" summary="ads user filtering on transaction history as well, not only in add income/expense functions.">
+      <option name="closed" value="true" />
+      <created>1745518359292</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1745518359292</updated>
+    </task>
+    <task id="LOCAL-00019" summary="ads READMY text.">
+      <option name="closed" value="true" />
+      <created>1745609664518</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1745609664518</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Updates README file as well as adding a future plans file to give a more detailed walkthrough of what's coming.">
+      <option name="closed" value="true" />
+      <created>1745690665202</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1745690665202</updated>
+    </task>
+    <task id="LOCAL-00021" summary="updates homescreen/dashboard with current balance and recent transactions. &#10;Ads placeholder area for 3 graphs as well.">
+      <option name="closed" value="true" />
+      <created>1745780030177</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1745780030177</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Reworked logic in home function:&#10;- Cleanup of code&#10;- Simpler logic using Django's annotate to get cleaner objects, only retrieving fields that I want.">
+      <option name="closed" value="true" />
+      <created>1745780767087</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1745780767087</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Reworked logic in home function:&#10;- Cleanup of code&#10;- Simpler logic using Django's annotate to get cleaner objects, only retrieving fields that I want.">
+      <option name="closed" value="true" />
+      <created>1745780874393</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1745780874393</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Fix amount display and color in dashboard recent transactions.">
+      <option name="closed" value="true" />
+      <created>1745782015469</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1745782015469</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Ads pie chart to dashboard&#10;- still need to connect it to categories that were setup.">
+      <option name="closed" value="true" />
+      <created>1745786406758</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745786406758</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Fixes pie chart&#10;- Resolves issues tied to categories and types (incomes/expenses)&#10;- Resolves transaction history issue tied to timezone">
+      <option name="closed" value="true" />
+      <created>1745951624000</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1745951624000</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Fixes pie chart&#10;- Resolves issues of transactions not showing up in transaction history due to timestamp sorting">
+      <option name="closed" value="true" />
+      <created>1746001961604</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1746001961604</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Fixes pie chart&#10;- Refactored add expense/income into a general function that can take different forms of transactions.">
+      <option name="closed" value="true" />
+      <created>1746012486364</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1746012486364</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Ads bar chart in graph section 2">
+      <option name="closed" value="true" />
+      <created>1746111538714</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1746111538714</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Ads line chart to the dashboard">
+      <option name="closed" value="true" />
+      <created>1746264375336</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1746264375336</updated>
+    </task>
+    <task id="LOCAL-00031" summary="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones).">
+      <option name="closed" value="true" />
+      <created>1746267351671</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1746267351671</updated>
+    </task>
+    <task id="LOCAL-00032" summary="modifies chart setup&#10;ensures legend consistency">
+      <option name="closed" value="true" />
+      <created>1746313746957</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1746313746957</updated>
+    </task>
+    <task id="LOCAL-00033" summary="ads edit functionality to pre existing transactions.">
+      <option name="closed" value="true" />
+      <created>1746434330925</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1746434330925</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily).">
+      <option name="closed" value="true" />
+      <created>1746964966979</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1746964966979</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ads recurring rule functionality and tested it in shell." />
+    <MESSAGE value="ads basic html page and transaction logic.&#10;- Transaction logic faulty due to timestamp handling, fix in next commit." />
+    <MESSAGE value="fixed transition total, it now works according to plan." />
+    <MESSAGE value="adds default user so that transactions are user bound." />
+    <MESSAGE value="adds register user option as well as login, also sorted out user filtered transactions." />
+    <MESSAGE value="ads tests" />
+    <MESSAGE value="ads tests changed name of branches" />
+    <MESSAGE value="fixes CI issues" />
+    <MESSAGE value="ads functionality to add income and expenses&#10;ads future transaction section to transaction history&#10;ads base.html file for standardization and coherency&#10;fixes navigation between pages." />
+    <MESSAGE value="ads user filtering on transaction history as well, not only in add income/expense functions." />
+    <MESSAGE value="ads READMY text." />
+    <MESSAGE value="Updates README file as well as adding a future plans file to give a more detailed walkthrough of what's coming." />
+    <MESSAGE value="updates homescreen/dashboard with current balance and recent transactions. &#10;Ads placeholder area for 3 graphs as well." />
+    <MESSAGE value="Reworked logic in home function:&#10;- Cleanup of code&#10;- Simpler logic using Django's annotate to get cleaner objects, only retrieving fields that I want." />
+    <MESSAGE value="Fix amount display and color in dashboard recent transactions." />
+    <MESSAGE value="Ads pie chart to dashboard&#10;- still need to connect it to categories that were setup." />
+    <MESSAGE value="Fixes pie chart&#10;- Resolves issues tied to categories and types (incomes/expenses)&#10;- Resolves transaction history issue tied to timezone" />
+    <MESSAGE value="Fixes pie chart&#10;- Resolves issues of transactions not showing up in transaction history due to timestamp sorting" />
+    <MESSAGE value="Fixes pie chart&#10;- Refactored add expense/income into a general function that can take different forms of transactions." />
+    <MESSAGE value="Ads bar chart in graph section 2" />
+    <MESSAGE value="Ads line chart to the dashboard" />
+    <MESSAGE value="ads function so user can create custom categories for income and expense. &#10;ads function so user can delete custom categories (but not predefined ones)." />
+    <MESSAGE value="modifies chart setup&#10;ensures legend consistency" />
+    <MESSAGE value="ads edit functionality to pre existing transactions." />
+    <MESSAGE value="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sets up first part of automated recurring payment.&#10;For actual use it would need to be setup towards the actual server, but for now it suffices to run it manually (daily)." />
+  </component>
+</project>
