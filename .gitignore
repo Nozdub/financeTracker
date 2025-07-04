@@ -9,6 +9,7 @@ db.sqlite3
 .idea/
 *.iml
 
+
 # Node / React artifacts
 frontend/node_modules/
 
