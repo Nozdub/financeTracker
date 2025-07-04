@@ -1,0 +1,17 @@
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Database file (optional — only if you don’t want it in Git)
+db.sqlite3
+
+# IDE files
+.idea/
+*.iml
+
+
+# Node / React artifacts
+frontend/node_modules/
+
+# Vite build artifacts (if you ever build to dist/)
+frontend/dist/
