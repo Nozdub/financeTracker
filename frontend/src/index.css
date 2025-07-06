@@ -75,6 +75,7 @@ body {
 
 .nav-tab-label {
   font-size: 0.9rem;
+  font-weight: 600;
   color: #888;
   transition: color 0.3s ease;
   line-height: 1.3;
