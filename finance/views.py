@@ -11,9 +11,16 @@ from .forms import ExpenseForm, CategoryForm
 from .forms import RegisterForm, IncomeForm
 from .models import Income, Expense, Category
 from .utils import calculate_balance, get_next_due_date
+from django.http import FileResponse
+from django.conf import settings
+import os
 
 
 # Create your views here.
+
+def react_app(request):
+    index_path = os.path.join(settings.BASE_DIR, 'static', 'index.html')
+    return FileResponse(open(index_path, 'rb'))
 
 
 @login_required()
