@@ -2,6 +2,7 @@ import { useState } from 'react'
 import NavTab from './NavTab'
 import OverviewContent from './OverviewContent'
 import InvestmentsContent from './InvestmentsContent'
+import BudgetPlannerContent from './BudgetPlannerContent'
 
 function BaseLayout() {
   const [activeTab, setActiveTab] = useState('Overview')
@@ -21,6 +22,8 @@ function BaseLayout() {
         return <OverviewContent />
       case 'Investments':
         return <InvestmentsContent />
+      case 'Budget Planner':
+          return <BudgetPlannerContent />
       default:
         return <div style={{ textAlign: 'center', padding: '2rem' }}><p>Page not implemented yet.</p></div>
     }

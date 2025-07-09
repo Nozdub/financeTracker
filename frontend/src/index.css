@@ -138,8 +138,8 @@ body {
 
 .section-title {
   color: #474747;
-  font-family: 'Urbanist', sans-serif;  /* Same as logo */
-  font-weight: 700;                     /* Bold like logo tracker part */
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 1rem;
 }
