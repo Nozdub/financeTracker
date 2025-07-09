@@ -2,7 +2,7 @@ import React from 'react';
 import { Arc } from '@visx/shape';
 import { Group } from '@visx/group';
 
-const RadialProgress = ({ width = 200, height = 200, progress = 0.65 }) => {
+const RadialProgress = ({ width = 350, height = 200, progress = 0.65 }) => {
   const radius = Math.min(width, height) / 2;
 
   return (

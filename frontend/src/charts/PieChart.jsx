@@ -9,7 +9,7 @@ const data = [
   { category: 'Leisure', value: 200 },
 ];
 
-const PieChart = ({ width = 200, height = 200 }) => {
+const PieChart = ({ width = 350, height = 200 }) => {
   const radius = Math.min(width, height) / 2;
   const total = data.reduce((acc, d) => acc + d.value, 0);
   let cumulative = 0;

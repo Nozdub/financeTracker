@@ -11,7 +11,7 @@ const data = [
   { month: 'Apr', income: 3050, expense: 2500 },
 ];
 
-const LineChart = ({ width = 300, height = 200 }) => {
+const LineChart = ({ width = 350, height = 300 }) => {
   const xScale = scalePoint({
     domain: data.map(d => d.month),
     range: [0, width - 40],
