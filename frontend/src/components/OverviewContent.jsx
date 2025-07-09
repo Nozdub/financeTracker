@@ -8,13 +8,13 @@ function OverviewContent() {
       <h2 className="section-title">Financial Overview</h2>
       <div className="chart-card">
         <div className="chart-zone">
-          <PieChart width={300} height={200} />
+          <PieChart width={400} height={300} />
         </div>
         <div className="chart-zone">
-          <LineChart width={300} height={200} />
+          <LineChart width={350} height={300} />
         </div>
         <div className="chart-zone">
-          <RadialProgress width={200} height={200} progress={0.65} />
+          <RadialProgress width={300} height={300} progress={0.65} />
         </div>
       </div>
 
