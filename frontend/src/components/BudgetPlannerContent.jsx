@@ -218,12 +218,18 @@ function BudgetPlannerContent() {
 
         {['Income', 'Savings', 'Debt'].map((label, i) => (
           <Box
+          className="scrollable-no-scrollbar"
             key={i}
             sx={{
+                maxHeight: 300,
+                overflowY: 'auto',
               flex: '1 1 20%',
               minWidth: 250,
               p: 2,
               borderRadius: 4,
+              maxHeight: 350,                // <-- LIMIT HEIGHT
+              overflowY: 'auto',             // <-- ENABLE SCROLL
+              scrollbarGutter: 'stable',     // <-- PREVENT LAYOUT SHIFT
               background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
             }}
