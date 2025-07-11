@@ -8,7 +8,6 @@ import {
   TextField,
   MenuItem,
   Checkbox,
-  FormControlLabel,
 } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
@@ -26,7 +25,7 @@ function BudgetPlannerContent() {
         }}
       >
         <Box sx={{ minWidth: '120px', pr: 4 }}>
-          <Typography variant="h5" sx={{ fontWeight: 800, color: '#474747' }}>
+          <Typography variant="h5" sx={{ fontWeight: 900, color: '#474747' }}>
             JANUARY
           </Typography>
         </Box>
@@ -93,109 +92,151 @@ function BudgetPlannerContent() {
 
       <Divider sx={{ mb: 3 }} />
 
-      {/* Period Overview */}
-      <Box
-        sx={{
-          width: '20%',
-          minWidth: 250,
-          p: 2,
-          mb: 2,
-          borderRadius: 4,
-          background: 'radial-gradient(circle, #E8E1D4 0%, rgba(240, 240, 240, 0.18) 100%)',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 1.5,
-        }}
-      >
-        <Box sx={{ width: '100%', textAlign: 'center' }}>
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 0, color: '#474747' }}>
+      {/* Top Row: Period Overview + 3 Chart Placeholders */}
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2}}>
+        <Box
+          sx={{
+            flex: '1 1 20%',
+            minWidth: 250,
+            p: 2,
+            borderRadius: 4,
+            background: 'radial-gradient(circle, #E8E1D4 0%, rgba(240, 240, 240, 0.18) 100%)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, textAlign: 'center' }}>
             Period Overview
           </Typography>
-        </Box>
 
-        <TextField select label="Choose a Year" defaultValue="2024" size="small">
-          <MenuItem value="2024">2024</MenuItem>
-          <MenuItem value="2025">2025</MenuItem>
-          <MenuItem value="2026">2026</MenuItem>
-        </TextField>
+          <TextField select label="Year" defaultValue="2024" size="small" fullWidth sx={{ mb: 3 }}>
+            <MenuItem value="2024">2024</MenuItem>
+            <MenuItem value="2025">2025</MenuItem>
+            <MenuItem value="2026">2026</MenuItem>
+          </TextField>
 
-        <TextField select label="Choose a Month" defaultValue="January" size="small">
-          {[
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December',
-          ].map((month) => (
-            <MenuItem key={month} value={month}>
-              {month}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        <TextField
-          label="Start on Day"
-          type="number"
-          defaultValue={1}
-          size="small"
-          inputProps={{ min: 1, max: 31 }}
-        />
-      </Box>
-
-      {/* Cash Flow Summary */}
-      <Box
-        sx={{
-          width: '20%',
-          minWidth: 250,
-          p: 2,
-          borderRadius: 4,
-          background: 'radial-gradient(circle, #E8E1D4 0%, rgba(240, 240, 240, 0.18) 100%)',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-          mt: 1,
-        }}
-      >
-        <Box sx={{ width: '100%', textAlign: 'center', mb: 0 }}>
-          <Typography variant="h6" sx={{ fontWeight: 600, color: '#474747' }}>
-            Cash Flow Summary
-          </Typography>
-        </Box>
-
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr>
-              <th style={{ textAlign: 'left', fontWeight: 'bold' }}>Name</th>
-              <th style={{ textAlign: 'center', fontWeight: 'bold' }}>Budget</th>
-              <th style={{ textAlign: 'center', fontWeight: 'bold' }}>Actual</th>
-            </tr>
-          </thead>
-          <tbody>
+          <TextField select label="Month" defaultValue="January" size="small" fullWidth sx={{ mb: 3 }}>
             {[
-              ['Rollover', true],
-              ['Income'],
-              ['Bills'],
-              ['Expenses'],
-              ['Savings'],
-              ['Debt'],
-              ['Left'],
-            ].map(([label, isRollover], i) => (
-              <tr key={i}>
-                <td style={{ padding: '6px 4px', verticalAlign: 'middle' }}>
-                  <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
-                    {label}
-                    {isRollover && (
-                      <Checkbox size="small" sx={{ ml: 1 }} />
-                    )}
-                  </Typography>
-                </td>
-                <td style={{ textAlign: 'right', padding: '1px 1px' }}>
-                  <TextField variant="outlined" size="small" fullWidth />
-                </td>
-                <td style={{ textAlign: 'right', padding: '1px 0px' }}>
-                  <TextField variant="outlined" size="small" fullWidth />
-                </td>
-              </tr>
+              'January', 'February', 'March', 'April', 'May', 'June',
+              'July', 'August', 'September', 'October', 'November', 'December',
+            ].map((month) => (
+              <MenuItem key={month} value={month}>{month}</MenuItem>
             ))}
-          </tbody>
-        </table>
+          </TextField>
+
+          <TextField
+            label="Start on Day"
+            type="number"
+            defaultValue={1}
+            size="small"
+            inputProps={{ min: 1, max: 31 }}
+            fullWidth
+          />
+        </Box>
+
+        {[1, 2, 3].map((index) => (
+          <Box
+            key={index}
+            sx={{
+              flex: '1 1 20%',
+              minWidth: 250,
+              p: 2,
+              borderRadius: 4,
+              background: 'radial-gradient(circle, #f5f5f5 0%, #e0e0e0 100%)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            }}
+          />
+        ))}
       </Box>
+
+      {/* Middle Row: Cash Flow Summary, Income, Savings, Debt */}
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
+        {['Cash Flow Summary', 'Income', 'Savings', 'Debt'].map((label, i) => (
+          <Box
+            key={i}
+            sx={{
+              flex: '1 1 20%',
+              minWidth: 250,
+              p: 2,
+              borderRadius: 4,
+              background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240, 240, 240, 0.3) 100%)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            }}
+          >
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb:1 }}>
+              {label}
+            </Typography>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                    <tr>
+                        <th style={{ textAlign: 'left', fontSize: '0.75rem' }}>Name</th>
+                        <th style={{ textAlign: 'center', fontSize: '0.75rem' }}>Budget</th>
+                        <th style={{ textAlign: 'center', fontSize: '0.75rem' }}>Actual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {[
+                        ['Rollover', true],
+                        ['Income'],
+                        ['Bills'],
+                        ['Expenses'],
+                        ['Savings'],
+                        ['Debt'],
+                        ['Left'],
+                    ].map(([label, isRollover], i) => (
+                        <tr key={i}>
+                            <td style={{ padding: '4px 0', verticalAlign: 'middle' }}>
+                                <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center' }}>
+                                    {label}
+                                    {isRollover && (
+                                        <Checkbox size="small" sx={{ ml: 1, p: 0.5 }} />
+                                    )}
+                                </Typography>
+                            </td>
+                            <td style={{ textAlign: 'right', padding: '2px' }}>
+                                <TextField
+                                    size="small"
+                                    variant="outlined"
+                                    fullWidth
+                                    inputProps={{ style: { fontSize: '0.75rem' } }}
+                                />
+                            </td>
+                            <td style={{ textAlign: 'right', padding: '2px' }}>
+                                <TextField
+                                    size="small"
+                                    variant="outlined"
+                                    fullWidth
+                                    inputProps={{ style: { fontSize: '0.75rem' } }}
+                                />
+                            </td>
+                        </tr>
+                    ))}
+            </tbody>
+            </table>
+          </Box>
+        ))}
+      </Box>
+
+      {/* Bottom Row: Bills and Expenses */}
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
+        {['Bills', 'Expenses'].map((label, i) => (
+        <Box
+            key={i}
+            sx={{
+            flex: '1 1 20%',
+            minWidth: 250,
+            p: 2,
+            borderRadius: 4,
+            background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240, 240, 240, 0.3) 100%)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            }}
+        >
+        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+            {label}
+        </Typography>
+        </Box>
+        ))}
+    </Box>
+
     </>
   );
 }
