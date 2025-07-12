@@ -251,7 +251,7 @@ function BudgetPlannerContent() {
         {/* Income, Savings, Debt (Empty Table Cards) */}
         {['Income', 'Savings', 'Debt'].map((label, i) => (
           <Box
-            key={i}
+            className="scrollable-no-scrollbar"
             sx={{
               flex: '1 1 20%',
               minWidth: 250,
@@ -275,7 +275,7 @@ function BudgetPlannerContent() {
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
         {['Bills', 'Expenses'].map((label, i) => (
           <Box
-            key={i}
+            className="scrollable-no-scrollbar"
             sx={{
               flex: '1 1 20%',
               minWidth: 250,
