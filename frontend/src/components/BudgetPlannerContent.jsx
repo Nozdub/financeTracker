@@ -10,6 +10,7 @@ import {
   Checkbox,
 } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import RadialProgress from '../charts/RadialProgress';
 
 function BudgetPlannerContent() {
   const renderEntryTable = (headers = ['Description', 'Budget', 'Actual'], rows = 10) => (
@@ -70,13 +71,17 @@ function BudgetPlannerContent() {
             ['Left Over', '$3,086.33'],
           ].map(([label, value], index) => (
             <Box key={index} sx={{ textAlign: 'center' }}>
-              <Typography variant="caption" sx={{ fontWeight: 600 }}>{label}</Typography>
+              <Typography variant="caption" sx={{ fontWeight: 600 }}>
+                {label}
+              </Typography>
               <Typography variant="body2">{value}</Typography>
             </Box>
           ))}
 
           <Box sx={{ textAlign: 'center' }}>
-            <Typography variant="caption" sx={{ fontWeight: 600 }}>Progress</Typography>
+            <Typography variant="caption" sx={{ fontWeight: 600 }}>
+              Progress
+            </Typography>
             <Box
               sx={{
                 width: 100,
@@ -112,6 +117,7 @@ function BudgetPlannerContent() {
 
       {/* Top Row */}
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
+        {/* Period Overview */}
         <Box
           sx={{
             flex: '1 1 20%',
@@ -136,7 +142,9 @@ function BudgetPlannerContent() {
             {[
               'January', 'February', 'March', 'April', 'May', 'June',
               'July', 'August', 'September', 'October', 'November', 'December',
-            ].map(month => <MenuItem key={month} value={month}>{month}</MenuItem>)}
+            ].map((month) => (
+              <MenuItem key={month} value={month}>{month}</MenuItem>
+            ))}
           </TextField>
 
           <TextField
@@ -149,7 +157,29 @@ function BudgetPlannerContent() {
           />
         </Box>
 
-        {[1, 2, 3].map(index => (
+        {/* Left to Spend Chart */}
+        <Box
+          sx={{
+            flex: '1 1 20%',
+            minWidth: 250,
+            p: 2,
+            borderRadius: 4,
+            background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            textAlign: 'center',
+          }}
+        >
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+            Left to Spend
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <RadialProgress width={200} height={200} radius={100} fontSize={14} />
+
+        </Box>
+        </Box>
+
+        {/* Chart placeholders to be added here */}
+        {[1, 2].map(index => (
           <Box
             key={index}
             sx={{
@@ -157,8 +187,9 @@ function BudgetPlannerContent() {
               minWidth: 250,
               p: 2,
               borderRadius: 4,
-              background: 'radial-gradient(circle, #f5f5f5 0%, #e0e0e0 100%)',
+              background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+              textAlign: 'center',
             }}
           />
         ))}
@@ -166,6 +197,7 @@ function BudgetPlannerContent() {
 
       {/* Middle Row */}
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
+        {/* Cash Flow Summary */}
         <Box
           sx={{
             flex: '1 1 20%',
@@ -216,20 +248,17 @@ function BudgetPlannerContent() {
           </table>
         </Box>
 
+        {/* Income, Savings, Debt (Empty Table Cards) */}
         {['Income', 'Savings', 'Debt'].map((label, i) => (
           <Box
-          className="scrollable-no-scrollbar"
             key={i}
             sx={{
-                maxHeight: 300,
-                overflowY: 'auto',
               flex: '1 1 20%',
               minWidth: 250,
               p: 2,
               borderRadius: 4,
-              maxHeight: 350,                // <-- LIMIT HEIGHT
-              overflowY: 'auto',             // <-- ENABLE SCROLL
-              scrollbarGutter: 'stable',     // <-- PREVENT LAYOUT SHIFT
+              maxHeight: 350,
+              overflowY: 'auto',
               background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
             }}
@@ -252,6 +281,8 @@ function BudgetPlannerContent() {
               minWidth: 250,
               p: 2,
               borderRadius: 4,
+              maxHeight: 350,
+              overflowY: 'auto',
               background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
             }}
