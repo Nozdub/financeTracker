@@ -22,14 +22,14 @@ const RadialProgress = ({
         <Arc
           startAngle={0}
           endAngle={2 * Math.PI}
-          innerRadius={radius - 10}
+          innerRadius={radius - 20}
           outerRadius={radius}
           fill="#eee"
         />
         <Arc
           startAngle={0}
           endAngle={2 * Math.PI * progress}
-          innerRadius={radius - 10}
+          innerRadius={radius - 20}
           outerRadius={radius}
           fill="hsl(35, 100%, 70%)"
         />
