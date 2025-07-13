@@ -1,52 +1,63 @@
 import React from 'react';
-import { Group } from '@visx/group';
-import { Bar } from '@visx/shape';
-import { scaleBand, scaleLinear } from '@visx/scale';
 
-const data = [
-  { label: 'Budgeted', value: 10000 },
-  { label: 'Actual', value: 8200 },
+const defaultData = [
+  { category: 'Bills', budget: 180, actual: 160 },
+  { category: 'Expenses', budget: 80, actual: 15 },
+  { category: 'Savings', budget: 500, actual: 166 },
+  { category: 'Debt', budget: 200, actual: 50 },
 ];
 
-const BarChart = ({ width = 350, height = 200 }) => {
-  const xMax = width;
-  const yMax = height - 40;
+const BarChart = ({
+  width = 300,
+  height = 200,
+  data = defaultData,
+  barHeight = 10,
+  gap = 0,
+  barSpacing = 35,
+  budgetColor = '#FFE4A9',
+  actualColor = '#F8AFA6',
+  leftPadding = 55,
 
-  // Scales
-  const xScale = scaleBand({
-    domain: data.map((d) => d.label),
-    padding: 0.4,
-    range: [0, xMax],
-  });
 
-  const yScale = scaleLinear({
-    domain: [0, Math.max(...data.map((d) => d.value))],
-    nice: true,
-    range: [yMax, 0],
-  });
-
+}) => {
   return (
     <svg width={width} height={height}>
-      <Group top={20}>
-        {data.map((d, i) => {
-          const barWidth = xScale.bandwidth();
-          const barHeight = yMax - yScale(d.value);
-          const barX = xScale(d.label);
-          const barY = yScale(d.value);
+      {/* Bars */}
+      {data.map((d, i) => {
+        const yStart = i * barSpacing + 40;
+        return (
+          <g key={i} transform={`translate(${leftPadding}, ${yStart})`}>
+            {/* Category label */}
+            <text x={-10} y={barHeight} textAnchor="end" fontSize={10} fill="#333">
+              {d.category}
+            </text>
 
-          return (
-            <Bar
-              key={i}
-              x={barX}
-              y={barY}
-              width={barWidth}
-              height={barHeight}
-              fill={i === 0 ? '#C8C8C8' : '#FFE4A9'}
-              rx={4}
-            />
-          );
-        })}
-      </Group>
+            {/* Budget bar */}
+            <rect x={0} y={0} height={barHeight} width={d.budget} fill={budgetColor} />
+
+            {/* Actual bar below */}
+            <rect x={0} y={barHeight + gap / 2} height={barHeight} width={d.actual} fill={actualColor}  />
+          </g>
+        );
+      })}
+
+      {/* X-Axis ticks (manual) */}
+      {[0, 100, 200, 300, 400, 500].map((val) => (
+        <g key={val} transform={`translate(${val + 50}, ${height - 20})`}>
+          <line y2={-5} stroke="#999" />
+          <text y={10} fontSize={8} textAnchor="middle" fill="#666">{val}</text>
+        </g>
+      ))}
+
+
+
+      {/* Legend */}
+      <g transform="translate(50, 10)">
+        <rect x={0} y={0} width={12} height={12} fill={budgetColor} />
+        <text x={18} y={10} fontSize={10} fill="#333">Budget</text>
+        <rect x={70} y={0} width={12} height={12} fill={actualColor} />
+        <text x={88} y={10} fontSize={10} fill="#333">Actual</text>
+      </g>
     </svg>
   );
 };

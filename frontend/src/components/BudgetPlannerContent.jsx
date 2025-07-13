@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import RadialProgress from '../charts/RadialProgress';
+import BarChart from '../charts/BarChart';
+
 
 function BudgetPlannerContent() {
   const renderEntryTable = (headers = ['Description', 'Budget', 'Actual'], rows = 10) => (
@@ -178,8 +180,28 @@ function BudgetPlannerContent() {
         </Box>
         </Box>
 
+        {/* Budget vs Actual Chart */}
+        <Box
+            sx={{
+                flex: '1 1 20%',
+                minWidth: 250,
+                p: 2,
+                borderRadius: 4,
+                background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                textAlign: 'center',
+                }}
+        >
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+                Budget vs Actual
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'left' }}>
+           < BarChart width={300} height={200} />
+            </Box>
+            </Box>
+
         {/* Chart placeholders to be added here */}
-        {[1, 2].map(index => (
+        {[2].map(index => (
           <Box
             key={index}
             sx={{
