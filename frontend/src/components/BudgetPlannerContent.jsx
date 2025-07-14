@@ -12,7 +12,7 @@ import {
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import RadialProgress from '../charts/RadialProgress';
 import BarChart from '../charts/BarChart';
-
+import PieChart from '../charts/PieChart';
 
 function BudgetPlannerContent() {
   const renderEntryTable = (headers = ['Description', 'Budget', 'Actual'], rows = 10) => (
@@ -47,7 +47,7 @@ function BudgetPlannerContent() {
 
   return (
     <>
-      {/* Header: Month + Budget Summary */}
+      {/* Header */}
       <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 4, mb: 2, flexWrap: 'wrap' }}>
         <Box sx={{ minWidth: '120px', pr: 4 }}>
           <Typography variant="h5" sx={{ fontWeight: 900, color: '#474747' }}>
@@ -159,7 +159,7 @@ function BudgetPlannerContent() {
           />
         </Box>
 
-        {/* Left to Spend Chart */}
+        {/* Left to Spend */}
         <Box
           sx={{
             flex: '1 1 20%',
@@ -176,45 +176,48 @@ function BudgetPlannerContent() {
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <RadialProgress width={200} height={200} radius={100} fontSize={14} />
-
+          </Box>
         </Box>
-        </Box>
 
-        {/* Budget vs Actual Chart */}
+        {/* Budget vs Actual */}
         <Box
-            sx={{
-                flex: '1 1 20%',
-                minWidth: 250,
-                p: 2,
-                borderRadius: 4,
-                background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                textAlign: 'center',
-                }}
+          sx={{
+            flex: '1 1 20%',
+            minWidth: 250,
+            p: 2,
+            borderRadius: 4,
+            background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            textAlign: 'center',
+          }}
         >
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
-                Budget vs Actual
-            </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'left' }}>
-           < BarChart width={300} height={200} />
-            </Box>
-            </Box>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+            Budget vs Actual
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'left' }}>
+            <BarChart width={300} height={200} />
+          </Box>
+        </Box>
 
-        {/* Chart placeholders to be added here */}
-        {[2].map(index => (
-          <Box
-            key={index}
-            sx={{
-              flex: '1 1 20%',
-              minWidth: 250,
-              p: 2,
-              borderRadius: 4,
-              background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-              textAlign: 'center',
-            }}
-          />
-        ))}
+        {/* Expense Category Breakdown */}
+        <Box
+          sx={{
+            flex: '1 1 20%',
+            minWidth: 250,
+            p: 2,
+            borderRadius: 4,
+            background: 'radial-gradient(circle, #F4F1EB 0%, rgba(240,240,240,0.3) 100%)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            textAlign: 'center',
+          }}
+        >
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+            Expense Category Breakdown
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <PieChart width={250} height={200} />
+          </Box>
+        </Box>
       </Box>
 
       {/* Middle Row */}
@@ -270,9 +273,10 @@ function BudgetPlannerContent() {
           </table>
         </Box>
 
-        {/* Income, Savings, Debt (Empty Table Cards) */}
-        {['Income', 'Savings', 'Debt'].map((label, i) => (
+        {/* Income / Savings / Debt tables */}
+        {['Income', 'Savings', 'Debt'].map((label) => (
           <Box
+            key={label}
             className="scrollable-no-scrollbar"
             sx={{
               flex: '1 1 20%',
@@ -295,8 +299,9 @@ function BudgetPlannerContent() {
 
       {/* Bottom Row */}
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
-        {['Bills', 'Expenses'].map((label, i) => (
+        {['Bills', 'Expenses'].map((label) => (
           <Box
+            key={label}
             className="scrollable-no-scrollbar"
             sx={{
               flex: '1 1 20%',
