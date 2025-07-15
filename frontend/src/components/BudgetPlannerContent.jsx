@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -14,7 +14,10 @@ import RadialProgress from '../charts/RadialProgress';
 import BarChart from '../charts/BarChart';
 import PieChart from '../charts/PieChart';
 
+
+
 function BudgetPlannerContent() {
+    const [selectedMonth, setSelectedMonth] = useState('January');
   const renderEntryTable = (headers = ['Description', 'Budget', 'Actual'], rows = 10) => (
     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
       <thead>
@@ -51,7 +54,7 @@ function BudgetPlannerContent() {
       <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 4, mb: 2, flexWrap: 'wrap' }}>
         <Box sx={{ minWidth: '120px', pr: 4 }}>
           <Typography variant="h5" sx={{ fontWeight: 900, color: '#474747' }}>
-            JANUARY
+            {selectedMonth.toUpperCase()}
           </Typography>
         </Box>
 
@@ -130,7 +133,7 @@ function BudgetPlannerContent() {
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, textAlign: 'center' }}>
+          <Typography  sx={{ fontWeight: 600, mb: 1, textAlign: 'center', color: '#474747' }}>
             Period Overview
           </Typography>
 
@@ -140,7 +143,15 @@ function BudgetPlannerContent() {
             <MenuItem value="2026">2026</MenuItem>
           </TextField>
 
-          <TextField select label="Month" defaultValue="January" size="small" fullWidth sx={{ mb: 3 }}>
+          <TextField
+            select
+            label="Month"
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            size="small"
+            fullWidth
+            sx={{ mb: 3 }}
+            >
             {[
               'January', 'February', 'March', 'April', 'May', 'June',
               'July', 'August', 'September', 'October', 'November', 'December',
@@ -171,7 +182,7 @@ function BudgetPlannerContent() {
             textAlign: 'center',
           }}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: '#474747' }}>
             Left to Spend
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -191,7 +202,7 @@ function BudgetPlannerContent() {
             textAlign: 'center',
           }}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: '#474747' }}>
             Budget vs Actual
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'left' }}>
@@ -211,7 +222,7 @@ function BudgetPlannerContent() {
             textAlign: 'center',
           }}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: '#474747' }}>
             Expense Category Breakdown
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -233,7 +244,7 @@ function BudgetPlannerContent() {
             boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
           }}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: '#474747' }}>
             Cash Flow Summary
           </Typography>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -289,7 +300,7 @@ function BudgetPlannerContent() {
               boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
             }}
           >
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: '#474747' }}>
               {label}
             </Typography>
             {renderEntryTable()}
@@ -314,7 +325,7 @@ function BudgetPlannerContent() {
               boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
             }}
           >
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1, color: '#474747' }}>
               {label}
             </Typography>
             {renderEntryTable()}
