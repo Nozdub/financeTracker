@@ -180,28 +180,32 @@ body {
   margin-bottom: 1rem;
 }
 
-.transactions-section {
-  overflow-x: auto;  /* allows scroll if needed */
-  justify-content: center;
-}
-
 .transactions-section table {
-  width: 100%;
-  border-collapse: collapse;
+  font-family: 'Urbanist', sans-serif;
+  min-width: 90%
+
 
 }
 
-.transactions-section table td,
-.transactions-section table th {
-  padding: 0.5rem 1rem; /* reduced horizontal padding */
+.transactions-section th,
+.transactions-section td {
   text-align: left;
+  padding-top: 0.5rem;
+  padding-left: 10rem;
+
+
 }
 
 .transactions-section th {
-  color: #FFFFFF;
-  font-family: 'Urbanist', sans-serif;  /* Same as logo */
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.transactions-section td {
+  color: #222;
   font-weight: 400;
 }
+
 
 /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
 .scrollable-no-scrollbar::-webkit-scrollbar {
