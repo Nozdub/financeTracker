@@ -11,7 +11,21 @@ function OverviewContent() {
           <PieChart width={300} height={250} />
         </div>
         <div className="chart-zone">
-          <LineChart width={300} height={250} />
+          <LineChart
+            width={300}
+            height={250}
+            data={[
+                { month: 'Jan', income: 3000, expense: 2000 },
+                { month: 'Feb', income: 3200, expense: 2100 },
+                { month: 'Mar', income: 3100, expense: 2200 },
+                { month: 'Apr', income: 3050, expense: 2500 },
+                ]}
+            lines={[
+                { key: 'income', color: '#f0a500' },
+                { key: 'expense', color: '#888888' },
+            ]}
+            showAxes={true}
+          />
         </div>
         <div className="chart-zone">
           <RadialProgress width={250} height={250} progress={0.65} />

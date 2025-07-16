@@ -9,6 +9,8 @@ import {
   Box,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import LineChart from '../charts/LineChart';
+
 
 function InvestmentsContent() {
   const [expanded, setExpanded] = useState(false);
@@ -88,13 +90,8 @@ function InvestmentsContent() {
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
         />
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ height: '40px' }}
-        >
-          Add
-        </Button>
+        <Button className="custom-btn add-btn" onClick={handleAddInvestment}>ADD</Button>
+
       </Box>
 
       {/* Divider before Investment List */}
@@ -105,14 +102,30 @@ function InvestmentsContent() {
   <Paper
     elevation={3}
     sx={{
-      p: 2,
-      mb: 2,
-      borderRadius: '12px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-    }}
+  p: 2,
+  mb: 2,
+  borderRadius: '12px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+
+  //Background gradient
+  background: 'radial-gradient(circle, rgba(165, 209, 232, 0.38) 0%, rgba(137, 176, 186, 0.29) 100%)',
+
+  //Border (stroke)
+  border: '0.1mm solid #7C7C7C',
+
+  //Backdrop blur
+  backdropFilter: 'blur(12px)', // you can't animate range like 8.5–14.7 directly
+  WebkitBackdropFilter: 'blur(12px)',
+
+  //Inner shadow
+  boxShadow: `
+    inset 0px 4px 30px 9px rgba(255, 255, 255, 0.25),
+    6px 6px 18px rgba(0, 0, 0, 0.25) /* drop shadow */
+  `
+}}
   >
     <div>
       <strong>Apple Inc. (AAPL)</strong>
@@ -122,17 +135,28 @@ function InvestmentsContent() {
 
     <div>
       {/* Placeholder graph */}
-      <img
-        src="https://placehold.co/100x50?text=Graph"
-        alt="graph"
-        style={{ marginRight: '1rem' }}
-      />
+      <LineChart
+  width={200}
+  height={90}
+  data={[
+    { month: 'Jan', value: 200 },
+    { month: 'Feb', value: 424 },
+    { month: 'Mar', value: 399 },
+    { month: 'Apr', value: 490 },
+  ]}
+  lines={[
+    { key: 'value', color: 'orange' },
+  ]}
+  showAxes={true}
+  numTicksLeft={3}
+/>
+
     </div>
 
     <div style={{ display: 'flex', gap: '0.5rem' }}>
-      <Button variant="outlined" size="small">Add More</Button>
-      <Button variant="contained" color="warning" size="small">Sell</Button>
-      <Button variant="contained" color="error" size="small">Remove</Button>
+      <Button className="custom-btn more-btn">ADD MORE</Button>
+        <Button className="custom-btn sell-btn">SELL</Button>
+        <Button className="custom-btn remove-btn">REMOVE</Button>
     </div>
   </Paper>
 </div>
