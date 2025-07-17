@@ -3,6 +3,9 @@ import NavTab from './NavTab'
 import OverviewContent from './OverviewContent'
 import InvestmentsContent from './InvestmentsContent'
 import BudgetPlannerContent from './BudgetPlannerContent'
+import TransactionsContent from './TransactionsContent';
+
+
 
 function BaseLayout() {
   const [activeTab, setActiveTab] = useState('Overview')
@@ -10,11 +13,10 @@ function BaseLayout() {
 
   const tabs = [
     'Overview',
-    'Add Transactions',
     'Transactions',
     'Budget Planner',
     'Investments'
-  ]
+    ];
 
   const renderContent = () => {
     switch (activeTab) {
@@ -24,6 +26,8 @@ function BaseLayout() {
         return <InvestmentsContent />
       case 'Budget Planner':
           return <BudgetPlannerContent />
+      case 'Transactions':
+          return <TransactionsContent />
       default:
         return <div style={{ textAlign: 'center', padding: '2rem' }}><p>Page not implemented yet.</p></div>
     }
