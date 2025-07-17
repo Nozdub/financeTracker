@@ -159,17 +159,6 @@ pytest
 Screenshots
 -----------
 
-*Add screenshots to visually showcase the UI. Placeholders for now:*
-
--   Overview page
-
--   Budget Planner with charts
-
--   Investment tracking
-
--   Add Transactions modal
-
-
 ![Overview Page](https://github.com/Nozdub/financeTracker/blob/main/financeTrackerOverview.png?raw=true)
 ![Transactions Page](https://github.com/Nozdub/financeTracker/blob/main/financeTrackerTransactions.png?raw=true)
 ![BudgetPlanner Page](https://github.com/Nozdub/financeTracker/blob/main/financeTrackerBudgetPlanner.png?raw=true)
