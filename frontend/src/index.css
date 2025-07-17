@@ -265,3 +265,18 @@ body {
 }
 
 
+/* Transaction section */
+.transaction-table {
+  width: 90%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.transaction-table th,
+.transaction-table td {
+  width: 16.66%; /* 100% / 6 columns */
+  text-align: center;
+}
+
+
