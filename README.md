@@ -1,4 +1,4 @@
-Finance Tracker
+<img width="1898" height="899" alt="image" src="https://github.com/user-attachments/assets/eff44047-03fa-45f0-997f-eabdca895d55" />Finance Tracker
 ===============
 
 A full-stack personal finance management application built with Django and React. This platform allows users to track income and expenses, visualize financial trends, and interact with tools for budget planning and investment monitoring.
@@ -169,12 +169,12 @@ Screenshots
 
 -   Add Transactions modal
 
-```
-![Overview Page](./screenshots/overview.png)
-![Budget Planner](./screenshots/budget.png)
-![Investment Panel](./screenshots/investment.png)
-![Add Transaction Modal](./screenshots/add_transaction.png)
-```
+
+![Overview Page](https://github.com/Nozdub/financeTracker/blob/main/financeTrackerOverview.png?raw=true)
+![Transactions Page](https://github.com/Nozdub/financeTracker/blob/main/financeTrackerTransactions.png?raw=true)
+![BudgetPlanner Page](https://github.com/Nozdub/financeTracker/blob/main/financeTrackerBudgetPlanner.png?raw=true)
+![Investments Page](https://github.com/Nozdub/financeTracker/blob/main/financeTrackerInvestments.png?raw=true)
+
 
 * * * * *
 
