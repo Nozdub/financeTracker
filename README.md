@@ -1,4 +1,4 @@
-<img width="1898" height="899" alt="image" src="https://github.com/user-attachments/assets/eff44047-03fa-45f0-997f-eabdca895d55" />Finance Tracker
+Finance Tracker
 ===============
 
 A full-stack personal finance management application built with Django and React. This platform allows users to track income and expenses, visualize financial trends, and interact with tools for budget planning and investment monitoring.
