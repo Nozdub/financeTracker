@@ -1,8 +1,11 @@
 import LineChart from '../charts/LineChart'
 import PieChart from '../charts/PieChart'
 import RadialProgress from '../charts/RadialProgress'
+import { Typography } from '@mui/material';
 
 function OverviewContent() {
+    const currentBalance = 26232.56;
+
   return (
     <>
       <h2 className="section-title">Financial Overview</h2>
@@ -33,9 +36,37 @@ function OverviewContent() {
       </div>
 
       <div className="balance-section">
-        <h2 className="section-title">Current Balance</h2>
-        <p>26,232.56</p>
-      </div>
+  <Typography
+    variant="h6"
+    align="center"
+    sx={{
+      fontFamily: 'Urbanist, sans-serif',
+      fontWeight: 700,
+      fontSize: '1.5rem',
+      color: '#474747',
+      mt: 4,
+      mb: 1,
+    }}
+  >
+    Current Balance
+  </Typography>
+
+  <Typography
+    align="center"
+    sx={{
+      fontFamily: 'Urbanist, sans-serif',
+      fontWeight: 600,
+      fontSize: '2rem',
+      color: '#2e2e2e',
+      mb: 2,
+    }}
+  >
+    {currentBalance.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}
+  </Typography>
+</div>
 
       <hr className="section-divider" />
 
