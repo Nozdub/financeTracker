@@ -1,10 +1,20 @@
 import { useEffect, useState } from 'react';
-import { Button, Tooltip } from '@mui/material';
+import {
+  Button,
+  Tooltip,
+  Menu,
+  MenuItem,
+  IconButton
+} from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddTransactionModal from './AddTransactionModal';
 
 function TransactionsContent() {
   const [transactions, setTransactions] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openCategoryModal, setOpenCategoryModal] = useState(false);
 
   const fetchTransactions = async () => {
     const res = await fetch('/api/transactions/');
@@ -16,42 +26,56 @@ function TransactionsContent() {
     fetchTransactions();
   }, []);
 
-  const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
-
   return (
-    <div>
-      {/* Title row and Add button */}
-      <div style={{ position: 'relative' }}>
-        <h2 className="section-title" style={{ marginBottom: '4rem' }}>
-          Transactions Overview
-        </h2>
-        <Tooltip title="Add more transactions" arrow>
-          <Button
-            onClick={handleOpen}
-            sx={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              borderRadius: '50%',
-              minWidth: '42px',
-              height: '42px',
-              fontSize: '1.5rem',
-              fontWeight: 700,
-              lineHeight: 1,
-              padding: 0,
-              background: '#dbeafe',
-              color: '#1976d2',
-              boxShadow: '2px 2px 4px rgba(0,0,0,0.15)',
-              '&:hover': {
-                background: '#bfdbfe',
-              },
-            }}
-          >
-            +
-          </Button>
-        </Tooltip>
-      </div>
+    <div style={{ position: 'relative' }}>
+      {/* Header and menu button */}
+      <h2 className="section-title" style={{ marginBottom: '4rem' }}>
+        Transactions Overview
+      </h2>
+
+      <Tooltip title="Options" arrow>
+        <IconButton
+          onClick={(e) => setAnchorEl(e.currentTarget)}
+          sx={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            background: '#dbeafe',
+            color: '#1976d2',
+            boxShadow: '2px 2px 4px rgba(0,0,0,0.15)',
+            '&:hover': { background: '#bfdbfe' }
+          }}
+        >
+          <MoreVertIcon />
+        </IconButton>
+      </Tooltip>
+
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            setOpenAddModal(true);
+          }}
+        >
+          Add Transaction
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            setOpenEditModal(true);
+          }}
+        >
+          Edit Transactions
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            setAnchorEl(null);
+            setOpenCategoryModal(true);
+          }}
+        >
+          Manage Categories
+        </MenuItem>
+      </Menu>
 
       {/* Table content */}
       <div style={{ width: '90%', margin: '0 auto', overflowX: 'auto' }}>
@@ -76,14 +100,23 @@ function TransactionsContent() {
                 <td style={{ color: tx.amount < 0 ? 'crimson' : 'darkgreen' }}>
                   {tx.amount < 0 ? `-${Math.abs(tx.amount)}` : `+${tx.amount}`}
                 </td>
-                <td>{tx.balanceAfter?.toLocaleString(undefined, { minimumFractionDigits: 2 }) || '—'}</td>
+                <td>
+                  {tx.balanceAfter?.toLocaleString(undefined, {
+                    minimumFractionDigits: 2
+                  }) || '—'}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <AddTransactionModal open={openModal} onClose={handleClose} onAdded={fetchTransactions} />
+      {/* Modals */}
+      <AddTransactionModal
+        open={openAddModal}
+        onClose={() => setOpenAddModal(false)}
+        onAdded={fetchTransactions}
+      />
     </div>
   );
 }
