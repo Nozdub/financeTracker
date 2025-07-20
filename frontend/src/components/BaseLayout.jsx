@@ -1,37 +1,20 @@
-import { useState } from 'react'
-import NavTab from './NavTab'
-import OverviewContent from './OverviewContent'
-import InvestmentsContent from './InvestmentsContent'
-import BudgetPlannerContent from './BudgetPlannerContent'
+import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
+import OverviewContent from './OverviewContent';
+import InvestmentsContent from './InvestmentsContent';
+import BudgetPlannerContent from './BudgetPlannerContent';
 import TransactionsContent from './TransactionsContent';
-
-
+import NavTab from './NavTab';
 
 function BaseLayout() {
-  const [activeTab, setActiveTab] = useState('Overview')
-  const [showMobileNav, setShowMobileNav] = useState(false)
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const tabs = [
-    'Overview',
-    'Transactions',
-    'Budget Planner',
-    'Investments'
-    ];
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'Overview':
-        return <OverviewContent />
-      case 'Investments':
-        return <InvestmentsContent />
-      case 'Budget Planner':
-          return <BudgetPlannerContent />
-      case 'Transactions':
-          return <TransactionsContent />
-      default:
-        return <div style={{ textAlign: 'center', padding: '2rem' }}><p>Page not implemented yet.</p></div>
-    }
-  }
+    { label: 'Overview', path: '/' },
+    { label: 'Transactions', path: '/transactions' },
+    { label: 'Budget Planner', path: '/budget' },
+    { label: 'Investments', path: '/investments' },
+  ];
 
   return (
     <div className="app-wrapper">
@@ -41,45 +24,34 @@ function BaseLayout() {
             <div style={{ fontSize: '28px', fontWeight: '400', lineHeight: '0.4', textShadow: '2px 2px 3px rgba(0,0,0.4,0.4)' }}>FINANCE</div>
             <div style={{ fontSize: '32px', fontWeight: '700', textShadow: '2px 2px 3px rgba(0,0,0.4,0.4)' }}>TRACKER</div>
           </div>
-          <div className="burger" onClick={() => setShowMobileNav(!showMobileNav)}>☰</div>
+          <div className="burger" onClick={() => navigate('/')}>☰</div>
         </div>
 
         <nav className="nav-bar">
           {tabs.map(tab => (
             <NavTab
-              key={tab}
-              label={tab}
-              isActive={activeTab === tab}
-              onClick={() => setActiveTab(tab)}
+              key={tab.label}
+              label={tab.label}
+              isActive={location.pathname === tab.path}
+              onClick={() => navigate(tab.path)}
             />
           ))}
         </nav>
-
-        {showMobileNav && (
-          <div className="mobile-nav">
-            {tabs.map(tab => (
-              <div
-                key={tab}
-                className={`mobile-nav-item ${activeTab === tab ? 'active' : ''}`}
-                onClick={() => {
-                  setActiveTab(tab)
-                  setShowMobileNav(false)
-                }}
-              >
-                {tab}
-              </div>
-            ))}
-          </div>
-        )}
       </header>
 
       <main className="app-main">
         <div className="card">
-          {renderContent()}
+          <Routes>
+            <Route path="/" element={<OverviewContent />} />
+            <Route path="/transactions" element={<TransactionsContent />} />
+            <Route path="/budget" element={<BudgetPlannerContent />} />
+            <Route path="/investments" element={<InvestmentsContent />} />
+            <Route path="*" element={<p style={{ textAlign: 'center' }}>Page not found.</p>} />
+          </Routes>
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default BaseLayout
+export default BaseLayout;

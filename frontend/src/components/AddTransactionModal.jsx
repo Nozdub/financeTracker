@@ -1,10 +1,19 @@
-import { Modal, Box, Typography, TextField, MenuItem, Button, FormControlLabel, Checkbox } from '@mui/material';
+import {
+  Modal,
+  Box,
+  Typography,
+  TextField,
+  MenuItem,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from '@mui/material';
 import React, { useState } from 'react';
 
-function AddTransactionModal({ open, onClose }) {
+function AddTransactionModal({ open, onClose, onAdded }) {
   const [formData, setFormData] = useState({
     date: '',
-    type: '',
+    type: 'Expense',
     description: '',
     amount: '',
     recurring: false,
@@ -15,13 +24,40 @@ function AddTransactionModal({ open, onClose }) {
     setFormData({ ...formData, [field]: value });
   };
 
-  const handleSubmit = () => {
-    console.log(formData); // Replace this later with your submit logic
-    onClose();
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/transactions/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Failed to add transaction');
+
+      // Reset and close
+      setFormData({
+        date: '',
+        type: 'Expense',
+        description: '',
+        amount: '',
+        recurring: false,
+      });
+
+      onClose();
+      if (onAdded) onAdded(); // notify parent to refresh
+    } catch (err) {
+      console.error('Error submitting transaction:', err);
+    }
   };
 
   return (
-    <Modal open={open} onClose={onClose} hideBackdrop>
+    <Modal
+      open={open}
+      onClose={onClose}
+      slotProps={{ backdrop: { invisible: true } }}
+      aria-labelledby="add-transaction-title"
+      aria-describedby="add-transaction-description"
+    >
       <Box
         sx={{
           width: 600,
@@ -42,6 +78,7 @@ function AddTransactionModal({ open, onClose }) {
         }}
       >
         <Typography
+          id="add-transaction-title"
           sx={{
             color: '#474747',
             fontFamily: 'Urbanist, sans-serif',
