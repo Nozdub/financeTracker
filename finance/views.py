@@ -3,15 +3,17 @@ from datetime import timedelta, time, datetime, timezone, date
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Value, CharField, F, ExpressionWrapper, FloatField, Sum
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import ExpenseForm, CategoryForm
 from .forms import RegisterForm, IncomeForm
 from .models import Income, Expense, Category
 from .utils import calculate_balance, get_next_due_date
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 from django.conf import settings
 import os
 
@@ -105,44 +107,6 @@ def add_transaction(request, form_class, template_name, redirect_name):
     return render(request, template_name, {"form": form})
 
 
-def add_income(request):
-    return add_transaction(request, IncomeForm, "finance/add_income.html", "transaction_history")
-
-
-def edit_income(request, income_id):
-    income = get_object_or_404(Income, id=income_id, user=request.user)
-    if request.method == "POST":
-        form = IncomeForm(request.POST, instance=income)
-        if form.is_valid():
-            update_income = form.save(commit=False)
-            update_income.user = request.user
-            update_income.save()
-            return redirect("transaction_history")
-    else:
-        form = IncomeForm(instance=income)
-
-    return render(request, "finance/edit_income.html", {"form": form, "income": income})
-
-
-def add_expense(request):
-    return add_transaction(request, ExpenseForm, "finance/add_expense.html", "transaction_history")
-
-
-def edit_expense(request, expense_id):
-    expense = get_object_or_404(Expense, id=expense_id, user=request.user)
-    if request.method == "POST":
-        form = ExpenseForm(request.POST, instance=expense)
-        if form.is_valid():
-            update_expense = form.save(commit=False)
-            update_expense.user = request.user
-            update_expense.save()
-            return redirect("transaction_history")
-    else:
-        form = ExpenseForm(instance=expense)
-
-    return render(request, "finance/edit_expense.html", {"form": form, "expense": expense})
-
-
 def register(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -154,97 +118,6 @@ def register(request):
 
     return render(request, "finance/register.html", {"form": form})
 
-
-@login_required
-def home(request):
-    displayed_balance = calculate_balance(request.user)
-    today = date.today()
-
-    # Recent 5 transactions (income + expenses)
-    expenses = Expense.objects.filter(user=request.user, date__date__lte=today).annotate(
-        type=Value('Expense', output_field=CharField()),
-        adjusted_amount=ExpressionWrapper(F('amount') * -1, output_field=FloatField())
-    ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
-
-    incomes = Income.objects.filter(user=request.user, date__date__lte=today).annotate(
-        type=Value('Income', output_field=CharField()),
-        adjusted_amount=F('amount')
-    ).values('id', 'date', 'adjusted_amount', 'description', 'category__name', 'type')
-
-    transactions = incomes.union(expenses).order_by('-date')[:5]
-
-    # Pie chart: spending per category
-    category_totals = Expense.objects.filter(user=request.user, category__type="expense"
-                                             ).values('category__name'
-                                                      ).annotate(total=Sum('amount')
-                                                                 ).order_by('-total')
-
-    category_labels = [item['category__name'] for item in category_totals]
-    category_data = [item['total'] for item in category_totals]
-
-    # Assign consistent colors to categories
-    base_colors = [
-        'rgba(255, 99, 132, 0.7)',  # red
-        'rgba(54, 162, 235, 0.7)',  # blue
-        'rgba(255, 206, 86, 0.7)',  # yellow
-        'rgba(75, 192, 192, 0.7)',  # teal
-        'rgba(153, 102, 255, 0.7)',  # purple
-        'rgba(255, 159, 64, 0.7)',  # orange
-        'rgba(100, 100, 255, 0.7)',  # custom blue
-        'rgba(200, 200, 0, 0.7)',  # custom yellow
-    ]
-    category_colors = base_colors[:len(category_labels)]
-    category_legend = zip(category_labels, category_colors)
-
-    # Bar chart: expenses by day (past 7 days)
-    last_week = today - timedelta(days=6)
-    daily_expenses = Expense.objects.filter(user=request.user, date__date__gte=last_week
-                    ).annotate(day=F('date__date')
-                    ).values('day'
-                    ).annotate(total=Sum('amount')
-                    ).order_by('day')
-
-    bar_labels = []
-    bar_data = []
-    for i in range(7):
-        current_day = last_week + timedelta(days=i)
-        bar_labels.append(current_day.strftime("%Y-%m-%d"))
-        day_data = next((item['total'] for item in daily_expenses if item['day'] == current_day), 0)
-        bar_data.append(float(day_data))
-
-    # Line chart: income vs expense per day (last 7 days)
-    line_labels = [(today - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(6, -1, -1)]
-    line_income_data = []
-    line_expense_data = []
-
-    for label in line_labels:
-        date_obj = datetime.strptime(label, "%Y-%m-%d").date()
-        day_income = Income.objects.filter(user=request.user, date__date=date_obj).aggregate(total=Sum('amount'))[
-                         'total'] or 0
-        day_expense = Expense.objects.filter(user=request.user, date__date=date_obj).aggregate(total=Sum('amount'))[
-                          'total'] or 0
-        line_income_data.append(day_income)
-        line_expense_data.append(day_expense)
-
-    top3_labels = category_labels[:3]
-    top3_data = category_data[:3]
-
-    return render(request, "finance/home.html", {
-        "displayed_balance": displayed_balance,
-        "recent_transactions": transactions,
-        "category_labels": json.dumps(category_labels),
-        "category_data": json.dumps(category_data),
-        "category_colors": json.dumps(category_colors),
-        "category_legend": category_legend,  # 👈 used for HTML labels
-        "bar_labels": json.dumps(bar_labels),
-        "bar_data": json.dumps(bar_data),
-        "line_labels": json.dumps(line_labels),
-        "line_income_data": json.dumps(line_income_data),
-        "line_expense_data": json.dumps(line_expense_data),
-        "top3_labels": json.dumps(top3_labels),
-        "top3_data": json.dumps(top3_data),
-        "current_month_year": today.strftime("%B %Y")
-    })
 
 @login_required
 def manage_categories(request):
@@ -276,3 +149,80 @@ def delete_category(request, category_id):
     return redirect("manage_categories")
 
 
+@csrf_exempt
+def transaction_list(request):
+    if request.method == 'GET':
+        expenses = Expense.objects.all().values('date', 'description', 'amount', 'recurring')
+        incomes = Income.objects.all().values('date', 'description', 'amount', 'recurring')
+
+        transactions = [
+            {**e, 'type': 'Expense'} for e in expenses
+        ] + [
+            {**i, 'type': 'Income'} for i in incomes
+        ]
+
+        # Sort and add balanceAfter (running total)
+        transactions.sort(key=lambda x: x['date'])
+        total = 0.0
+        for tx in transactions:
+            total += tx['amount'] if tx['type'] == 'Income' else -abs(tx['amount'])
+            tx['balanceAfter'] = total
+        transactions.reverse()
+        return JsonResponse(transactions, safe=False)
+
+    elif request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            t_type = data.get('type')
+            date = data.get('date')
+            amount = float(data.get('amount', 0))
+            description = data.get('description', '')
+            recurring = data.get('recurring', False)
+
+            user = request.user if request.user.is_authenticated else User.objects.first()
+            default_category = Category.objects.filter(type=t_type.lower()).first()
+
+            if not default_category:
+                return JsonResponse({'error': 'No default category found'}, status=400)
+
+            if t_type == 'Income':
+                Income.objects.create(user=user, date=date, amount=amount, description=description,
+                                      category=default_category, recurring=recurring)
+            elif t_type == 'Expense':
+                Expense.objects.create(user=user, date=date, amount=amount, description=description,
+                                       category=default_category, recurring=recurring)
+            else:
+                return JsonResponse({'error': 'Invalid transaction type'}, status=400)
+
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid method'}, status=405)
+
+
+
+
+@csrf_exempt
+def get_balance(request):
+    user = request.user if request.user.is_authenticated else User.objects.first()
+    balance = calculate_balance(user)
+    return JsonResponse({"balance": balance})
+
+
+@csrf_exempt
+def get_summary(request):
+    user = request.user if request.user.is_authenticated else User.objects.first()
+
+    # Line Chart: Monthly income vs expense
+    monthly = []
+    for month in range(1, 13):
+        income = Income.objects.filter(user=user, date__month=month).aggregate(Sum("amount"))["amount__sum"] or 0
+        expense = Expense.objects.filter(user=user, date__month=month).aggregate(Sum("amount"))["amount__sum"] or 0
+        monthly.append({ "month": month, "income": income, "expense": expense })
+
+    # Pie Chart: Expenses by category
+    pie_data = Expense.objects.filter(user=user).values('category__name').annotate(total=Sum('amount')).order_by('-total')
+    categories = [{"category": p["category__name"], "amount": p["total"]} for p in pie_data]
+
+    return JsonResponse({ "monthly": monthly, "categories": categories })
