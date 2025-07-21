@@ -4,14 +4,17 @@ import {
   Tooltip,
   Menu,
   MenuItem,
-  IconButton
+  IconButton,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddTransactionModal from './AddTransactionModal';
+import EditTransactionModal from './EditTransactionModal';
+import ManageCategoriesModal from './ManageCategoriesModal';
 
 function TransactionsContent() {
   const [transactions, setTransactions] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openCategoryModal, setOpenCategoryModal] = useState(false);
@@ -28,7 +31,6 @@ function TransactionsContent() {
 
   return (
     <div style={{ position: 'relative' }}>
-      {/* Header and menu button */}
       <h2 className="section-title" style={{ marginBottom: '4rem' }}>
         Transactions Overview
       </h2>
@@ -43,14 +45,18 @@ function TransactionsContent() {
             background: '#dbeafe',
             color: '#1976d2',
             boxShadow: '2px 2px 4px rgba(0,0,0,0.15)',
-            '&:hover': { background: '#bfdbfe' }
+            '&:hover': { background: '#bfdbfe' },
           }}
         >
           <MoreVertIcon />
         </IconButton>
       </Tooltip>
 
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={() => setAnchorEl(null)}
+      >
         <MenuItem
           onClick={() => {
             setAnchorEl(null);
@@ -77,7 +83,7 @@ function TransactionsContent() {
         </MenuItem>
       </Menu>
 
-      {/* Table content */}
+      {/* Table */}
       <div style={{ width: '90%', margin: '0 auto', overflowX: 'auto' }}>
         <table className="transaction-table" style={{ width: '100%' }}>
           <thead>
@@ -97,12 +103,16 @@ function TransactionsContent() {
                 <td>{tx.type}</td>
                 <td>{tx.description}</td>
                 <td>{tx.recurring ? 'Yes' : 'No'}</td>
-                <td style={{ color: tx.amount < 0 ? 'crimson' : 'darkgreen' }}>
-                  {tx.amount < 0 ? `-${Math.abs(tx.amount)}` : `+${tx.amount}`}
+                <td
+                  style={{ color: tx.amount < 0 ? 'crimson' : 'darkgreen' }}
+                >
+                  {tx.amount < 0
+                    ? `-${Math.abs(tx.amount)}`
+                    : `+${tx.amount}`}
                 </td>
                 <td>
                   {tx.balanceAfter?.toLocaleString(undefined, {
-                    minimumFractionDigits: 2
+                    minimumFractionDigits: 2,
                   }) || '—'}
                 </td>
               </tr>
@@ -116,6 +126,14 @@ function TransactionsContent() {
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
         onAdded={fetchTransactions}
+      />
+      <EditTransactionModal
+        open={openEditModal}
+        onClose={() => setOpenEditModal(false)}
+      />
+      <ManageCategoriesModal
+        open={openCategoryModal}
+        onClose={() => setOpenCategoryModal(false)}
       />
     </div>
   );
