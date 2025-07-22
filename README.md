@@ -58,6 +58,8 @@ Features
 
 -   Modal-based glassmorphic transaction form
 
+-   Drop down menu with options to add transactions, modify transactions and manage categories. 
+
 -   Inline balance calculation
 
 -   Future-dated transactions tracked but excluded from balance until due
