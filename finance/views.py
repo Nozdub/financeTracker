@@ -152,8 +152,9 @@ def delete_category(request, category_id):
 @csrf_exempt
 def transaction_list(request):
     if request.method == 'GET':
-        expenses = Expense.objects.all().values('date', 'description', 'amount', 'recurring')
-        incomes = Income.objects.all().values('date', 'description', 'amount', 'recurring')
+        print("[DEBUG] Serving transaction list")
+        expenses = Expense.objects.all().values('id', 'date', 'description', 'amount', 'recurring')
+        incomes = Income.objects.all().values('id', 'date', 'description', 'amount', 'recurring')
 
         transactions = [
             {**e, 'type': 'Expense'} for e in expenses
@@ -167,7 +168,9 @@ def transaction_list(request):
         for tx in transactions:
             total += tx['amount'] if tx['type'] == 'Income' else -abs(tx['amount'])
             tx['balanceAfter'] = total
+
         transactions.reverse()
+        print(f"[DEBUG] Returned {len(transactions)} transactions")
         return JsonResponse(transactions, safe=False)
 
     elif request.method == 'POST':
@@ -194,12 +197,13 @@ def transaction_list(request):
             else:
                 return JsonResponse({'error': 'Invalid transaction type'}, status=400)
 
+            print("[DEBUG] Created new transaction:", data)
             return JsonResponse({'status': 'success'})
         except Exception as e:
+            print("[ERROR] Failed to create transaction:", str(e))
             return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Invalid method'}, status=405)
-
 
 
 
@@ -226,3 +230,26 @@ def get_summary(request):
     categories = [{"category": p["category__name"], "amount": p["total"]} for p in pie_data]
 
     return JsonResponse({ "monthly": monthly, "categories": categories })
+
+
+@csrf_exempt
+def delete_transaction(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            tx_id = data.get('id')
+            tx_type = data.get('type')
+            print(f"[DEBUG] Delete request: {data}")
+            print(f"[DEBUG] Deleting {tx_type} with ID {tx_id}")
+
+            if tx_type == 'Income':
+                Income.objects.filter(id=tx_id).delete()
+            elif tx_type == 'Expense':
+                Expense.objects.filter(id=tx_id).delete()
+            else:
+                return JsonResponse({'error': 'Invalid transaction type'}, status=400)
+
+            return JsonResponse({'status': 'deleted'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Invalid method'}, status=405)

@@ -129,7 +129,11 @@ function TransactionsContent() {
       />
       <EditTransactionModal
         open={openEditModal}
-        onClose={() => setOpenEditModal(false)}
+        onClose={() => {
+    setOpenEditModal(false);
+    fetchTransactions(); // refresh parent when modal closes
+        }}
+        onDataChanged={fetchTransactions} // call this inside modal on delete
       />
       <ManageCategoriesModal
         open={openCategoryModal}
