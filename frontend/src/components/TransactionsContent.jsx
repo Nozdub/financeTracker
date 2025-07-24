@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  Button,
   Tooltip,
   Menu,
   MenuItem,
@@ -26,8 +25,10 @@ function TransactionsContent() {
   };
 
   useEffect(() => {
+  if (!openEditModal) {
     fetchTransactions();
-  }, []);
+  }
+}, [openEditModal]);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -83,7 +84,6 @@ function TransactionsContent() {
         </MenuItem>
       </Menu>
 
-      {/* Table */}
       <div style={{ width: '90%', margin: '0 auto', overflowX: 'auto' }}>
         <table className="transaction-table" style={{ width: '100%' }}>
           <thead>
@@ -103,9 +103,7 @@ function TransactionsContent() {
                 <td>{tx.type}</td>
                 <td>{tx.description}</td>
                 <td>{tx.recurring ? 'Yes' : 'No'}</td>
-                <td
-                  style={{ color: tx.amount < 0 ? 'crimson' : 'darkgreen' }}
-                >
+                <td style={{ color: tx.amount < 0 ? 'crimson' : 'darkgreen' }}>
                   {tx.amount < 0
                     ? `-${Math.abs(tx.amount)}`
                     : `+${tx.amount}`}
@@ -121,20 +119,16 @@ function TransactionsContent() {
         </table>
       </div>
 
-      {/* Modals */}
       <AddTransactionModal
         open={openAddModal}
         onClose={() => setOpenAddModal(false)}
         onAdded={fetchTransactions}
       />
       <EditTransactionModal
-        open={openEditModal}
-        onClose={() => {
-    setOpenEditModal(false);
-    fetchTransactions(); // refresh parent when modal closes
-        }}
-        onDataChanged={fetchTransactions} // call this inside modal on delete
-      />
+         open={openEditModal}
+        onClose={() => setOpenEditModal(false)}
+        onDataChanged={fetchTransactions}
+        />
       <ManageCategoriesModal
         open={openCategoryModal}
         onClose={() => setOpenCategoryModal(false)}
