@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function EditTransactionModal({ open, onClose }) {
+function EditTransactionModal({ open, onClose, onDataChanged }) {
   const [transactions, setTransactions] = useState([]);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [txToDelete, setTxToDelete] = useState(null);
@@ -31,15 +31,12 @@ function EditTransactionModal({ open, onClose }) {
   }, [open]);
 
   const handleDeleteClick = (tx) => {
-    console.log("Clicked delete for", tx);
     setTxToDelete(tx);
     setConfirmOpen(true);
   };
 
   const confirmDelete = async () => {
   if (!txToDelete) return;
-
-  console.log("Sending delete request for", txToDelete);
 
   const res = await fetch('/api/delete_transaction/', {
     method: 'POST',
@@ -51,7 +48,8 @@ function EditTransactionModal({ open, onClose }) {
   });
 
   if (res.ok) {
-    onDataChanged?.();
+    await fetchTransactions(); // refresh modal list
+    if (onDataChanged) onDataChanged(); // refresh TransactionsContent
   } else {
     alert('Failed to delete transaction.');
   }
