@@ -184,6 +184,11 @@ Future Roadmap
 
 * * * * *
 
+Current issues
+-------------
+- Refreshing transaction list as transaction is edited or deleted. Modal updates, but page stays the same until manually refreshed. 
+* * * * *
+
 License
 -------
 
