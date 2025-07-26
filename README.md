@@ -178,10 +178,6 @@ Future Roadmap
 
 -   Bill and calendar reminders
 
--   Localization and multi-language support
-
--   Export to PDF or Excel
-
 * * * * *
 
 Current issues
